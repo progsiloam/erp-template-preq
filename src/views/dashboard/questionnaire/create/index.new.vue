@@ -1,9 +1,4 @@
 <template>
-  <p>values</p>
-  <pre>
-		{{ values }}
-	</pre
-  >
   <ShgForm :columns="1" ref="form">
     <v-container>
       <v-row align="start" justify="end" no-gutters>
