@@ -1,5 +1,5 @@
 <template>
-  <BaseDialog title="Add Question for Questionaire" width="600" v-model="isModalAddQuestionVisible">
+  <BaseDialog title="Add Question for Questionaire" width="600">
     <template v-slot:default>
       <ShgTextField v-model="searchText" label="Search Question" />
       <v-divider class="mt-2"></v-divider>
@@ -31,16 +31,8 @@
 
     <template v-slot:actions>
       <div class="d-flex ga-3">
-        <BaseButton @click="isModalAddQuestionVisible = !isModalAddQuestionVisible" color="secondary">Cancel</BaseButton>
-        <BaseButton
-          @click="
-            () => {
-              handleAddQuestions(), (isModalAddQuestionVisible = !isModalAddQuestionVisible);
-            }
-          "
-          color="primary"
-          >Submit</BaseButton
-        >
+        <BaseButton @click="handleCloseDialog" color="secondary">Cancel</BaseButton>
+        <BaseButton @click="handleAddQuestions" color="primary">Submit</BaseButton>
       </div>
     </template>
   </BaseDialog>
@@ -50,18 +42,16 @@
 import { fetchQuestionsPaginate } from '@/service/api';
 import type { Question } from '@/service/fetchQuestionsPaginate.type';
 import { BaseButton, BaseDialog, ShgTextField } from 'erp-template-vuetify-components';
-import { ref, watch } from 'vue';
-import { useCreateQuestionnaire } from './useNewQuestionnaire.store';
-
-let isModalAddQuestionVisible = defineModel('isModalAddQuestionVisible', {
-  type: Boolean,
-  default: false,
-});
+import { onMounted, ref, watch } from 'vue';
+import { closeDialog } from 'vue3-promise-dialog';
 
 const questionList = ref<Question[]>([]);
 const selectedQuestions = ref<Question[]>([]);
 const searchText = ref<string>('');
-const useNewQuestionnaire = useCreateQuestionnaire();
+
+const handleCloseDialog = () => {
+  closeDialog(null);
+};
 
 const handleAddQuestions = () => {
   const dataToInsert = selectedQuestions.value.map((q) => {
@@ -69,9 +59,12 @@ const handleAddQuestions = () => {
       question_text: q.question_text,
       input_type: q.input_type,
       options: q.options,
+      is_required: false,
     };
   });
-  useNewQuestionnaire.addQuestion(dataToInsert as any);
+  // useNewQuestionnaire.addQuestion(dataToInsert as any);
+
+  closeDialog(dataToInsert);
 };
 
 const onCheckBoxChange = (e: Event, item: Question) => {
@@ -88,13 +81,18 @@ const isCheckBoxChecked = (item: Question) => {
   return selectedQuestions.value.some((q) => q._id === item._id);
 };
 
-watch([searchText, isModalAddQuestionVisible], async ([newSearchText, modalVisible]) => {
-  if (!modalVisible) {
-    return;
-  }
-  const search = { questionText: newSearchText ?? '' };
-  const res = await fetchQuestionsPaginate(search);
+const fetchQuestion = async (query: string) => {
+  const res = await fetchQuestionsPaginate({ questionText: query });
   questionList.value = res.data;
+};
+
+onMounted(() => {
+  fetchQuestion('');
+});
+
+watch([searchText], async ([newSearchText]) => {
+  const search = newSearchText ?? '';
+  fetchQuestion(search);
   selectedQuestions.value = [];
 });
 </script>

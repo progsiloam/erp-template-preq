@@ -1,31 +1,37 @@
 <template>
-  <v-container>
-    <v-row align="center" justify="end" no-gutters>
-      <v-col cols="6">
-        <ShgAutocomplete
-          v-model="values.sub_major"
-          label="Major of Bussiness"
-          textPlaceholder="Please Select Major of Bussiness"
-          :items="quisionerTypeList.map((q) => q.type)"
-        />
-      </v-col>
-      <v-col cols="auto">
-        <div class="mt-5">
-          <BaseButton color="primary" @click="useNewQuestionnaire.addSections" :disabled="values.sub_major === ''"
-            >Add section</BaseButton
-          >
-        </div>
-      </v-col>
-    </v-row>
-  </v-container>
+  <p>values</p>
+  <pre>
+		{{ values }}
+	</pre
+  >
   <ShgForm :columns="1" ref="form">
+    <v-container>
+      <v-row align="start" justify="end" no-gutters>
+        <v-col cols="6">
+          <ShgAutocomplete
+            v-model="values.sub_major"
+            label="Major of Bussiness"
+            textPlaceholder="Please Select Major of Bussiness"
+            :items="quisionerTypeList.map((q) => q.type)"
+            :required="true"
+          />
+        </v-col>
+        <v-col cols="auto">
+          <div class="pa-3" style="margin-top: 19.95px">
+            <BaseButton color="primary" @click="useNewQuestionnaire.addSections" :disabled="values.sub_major === ''"
+              >Add section</BaseButton
+            >
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
     <v-container>
       <v-row class="mb-4" no-gutters>
         <v-col cols="12">
           <div v-for="(section, sIndex) in values.sections" :key="sIndex">
             <ShgCard title="Create Questionaire">
               <v-container>
-                <v-row align="center" justify="end" no-gutters>
+                <v-row align="start" justify="end" no-gutters>
                   <v-col cols="6">
                     <ShgTextField
                       v-model="values.sections[sIndex].name"
@@ -35,7 +41,7 @@
                     />
                   </v-col>
                   <v-col cols="auto">
-                    <div class="mt-4">
+                    <div class="pa-3" style="margin-top: 19.95px">
                       <BaseButton @click="handleAddQuestions(`sections[${sIndex}].questions`)" color="primary"
                         >Add Question
                       </BaseButton>
@@ -84,7 +90,6 @@
                         <ShgCheckbox
                           label="Required Question"
                           v-model="values.sections[sIndex].questions[qIndex].is_required"
-                          :required="true"
                           hint="Make this question required!"
                         />
                       </div>
@@ -146,8 +151,6 @@
       </v-row>
     </v-container>
   </ShgForm>
-
-  <DialogAddQuestion v-model:is-modal-add-question-visible="isModalAddQuestionVisible" />
 </template>
 
 <script setup lang="ts">
@@ -166,18 +169,26 @@ import {
 } from 'erp-template-vuetify-components';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted, ref } from 'vue';
-import DialogAddQuestion from './dialogAddQuestion.vue';
+import { openDialog } from 'vue3-promise-dialog';
+import DialogAddQuestion from './DialogAddQuestion.vue';
 import { useCreateQuestionnaire } from './useNewQuestionnaire.store';
 
-const isModalAddQuestionVisible = ref(false);
 const quisionerTypeList = ref<QuestionnaireType[]>([]);
 
 const useNewQuestionnaire = useCreateQuestionnaire();
 const { form, values } = storeToRefs(useNewQuestionnaire);
 
-const handleAddQuestions = (path: string) => {
-  isModalAddQuestionVisible.value = true;
+const handleAddQuestions = async (path: string) => {
+  // isModalAddQuestionVisible.value = true;
   useNewQuestionnaire.activeSection = path;
+
+  const data = await openDialog(DialogAddQuestion);
+
+  if (!data) {
+    return;
+  }
+
+  useNewQuestionnaire.addQuestion(data);
 };
 
 onMounted(async () => {
