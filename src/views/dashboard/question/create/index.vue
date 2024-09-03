@@ -20,20 +20,21 @@
             />
           </v-col>
           <v-col v-if="createQuestion.shouldRenderAddOptions()" cols="auto">
-            <div class="mx-2">
+            <div class="pa-3" style="margin-top: 19.95px">
               <v-btn
                 variant="tonal"
                 rounded="2"
                 size="small"
-                class="bg-orange-darken-3 mt-4"
+                class="bg-orange-darken-3"
                 @click="createQuestion.addOptions()"
+                style="height: 32px"
                 >+ Option</v-btn
               >
             </div>
           </v-col>
         </v-row>
         <div class="mb-6 mb-md-3" v-for="(option, oIndex) in createQuestion.values.options" :key="oIndex">
-          <v-row align="center" no-gutters>
+          <v-row align="start" no-gutters>
             <v-col>
               <v-row no-gutters>
                 <v-col cols="12" md="6">
@@ -54,8 +55,14 @@
             </v-col>
 
             <v-col cols="auto">
-              <div class="mx-2">
-                <v-btn variant="tonal" rounded="2" size="small" class="bg-error" @click="createQuestion.deleteKey(oIndex)"
+              <div class="pa-3" style="margin-top: 19.95px">
+                <v-btn
+                  style="height: 32px"
+                  variant="tonal"
+                  rounded="2"
+                  size="small"
+                  class="bg-error"
+                  @click="createQuestion.deleteKey(oIndex)"
                   >Delete</v-btn
                 >
               </div>
