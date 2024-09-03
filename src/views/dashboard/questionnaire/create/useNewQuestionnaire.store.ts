@@ -41,7 +41,7 @@ export const useCreateQuestionnaire = defineStore('useCreateQuestionnairem', () 
     const val = JSON.parse(JSON.stringify(values)) as CreateQuestionnaireDTO;
 
     try {
-      const res = await fetch('http://localhost:3000/api/question-questionnaire', {
+      const res = await fetch('http://localhost:3001/api/question-questionnaire', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,7 +1,4 @@
 <template>
-  <pre>
-    {{ values }}
-  </pre>
   <v-container>
     <v-row align="center" justify="end" no-gutters>
       <v-col cols="6">
@@ -74,7 +71,7 @@
                           />
                         </v-col>
                         <v-col>
-                          <ShgTextField
+                          <ShgNumeric
                             v-model="values.sections[sIndex].questions[qIndex].question_score"
                             :label="`Question Score ${qIndex + 1}`"
                             :field-name="`question-score-${qIndex}`"
@@ -122,10 +119,10 @@
                             />
                           </v-col>
                           <v-col>
-                            <ShgTextField
+                            <ShgNumeric
                               v-model="values.sections[sIndex].questions[qIndex].options[oIndex].option_score"
-                              :label="`Point Option ${oIndex + 1}`"
-                              :field-name="`point-option-${oIndex}`"
+                              :label="`Option Score ${oIndex + 1}`"
+                              :field-name="`option-score-${oIndex}`"
                               :required="true"
                             />
                           </v-col>
@@ -142,6 +139,9 @@
               </template>
             </ShgCard>
           </div>
+          <div class="text-end me-4 mt-5">
+            <ShgButton type="submit" @click="useNewQuestionnaire.onSubmit" />
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -154,7 +154,16 @@
 import { fetchQuestionnaireTypes } from '@/service/api';
 import type { QuestionnaireType } from '@/service/fetchQuestionnaireTypes.type';
 import { inputType } from '@/views/type';
-import { BaseButton, ShgAutocomplete, ShgCard, ShgCheckbox, ShgForm, ShgTextField } from 'erp-template-vuetify-components';
+import {
+  BaseButton,
+  ShgAutocomplete,
+  ShgButton,
+  ShgCard,
+  ShgCheckbox,
+  ShgForm,
+  ShgNumeric,
+  ShgTextField,
+} from 'erp-template-vuetify-components';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted, ref } from 'vue';
 import DialogAddQuestion from './dialogAddQuestion.vue';
