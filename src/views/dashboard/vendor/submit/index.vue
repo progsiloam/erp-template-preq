@@ -1,22 +1,15 @@
 <template>
   <ShgLayout :navigation-items="navigationItems">
     <template v-slot:contents="{ activeItemValue }">
-      <div v-if="navigationItems[0].value === activeItemValue">
-        <ShgCard :title="navigationItems[0].label">
-          <ShgForm :columns="1" ref="generalForm">
-            <ShgTextField v-model="generalData.firstName" label="First Name" :required="true" />
-            <ShgTextField v-model="generalData.lastName" label="Last Name" :required="true" />
-            <ShgTextField v-model="generalData.email" label="Email" :required="true" :rules="['email']" />
-            <ShgTextarea v-model="generalData.address" label="Address" :required="true" />
-          </ShgForm>
-
-          <template v-slot:actions>
-            <ShgButton type="submit" @click="submit"></ShgButton>
-          </template>
-        </ShgCard>
+      <div v-if="'select-vendor' === activeItemValue">
+        <SelectVendorTab />
       </div>
 
-      <ShgCard v-if="navigationItems[1].value === activeItemValue" :title="navigationItems[1].label">
+      <div v-if="'general' === activeItemValue">
+        <GeneralTab />
+      </div>
+
+      <ShgCard v-if="navigationItems[2].value === activeItemValue" :title="navigationItems[2].label">
         <ShgForm :columns="1" ref="userForm">
           <ShgTextField v-model="userData.username" label="Username" :required="true" />
           <ShgTextField v-model="userData.email" label="Email" :required="true" :rules="['email']" />
@@ -29,13 +22,6 @@
           />
         </ShgForm>
 
-        <template v-slot:options>
-          <v-card>
-            <v-card-title>Information</v-card-title>
-            <v-card-text>Please insert with correct data</v-card-text>
-          </v-card>
-        </template>
-
         <template v-slot:actions>
           <BaseButton @click="register">Register</BaseButton>
         </template>
@@ -47,19 +33,20 @@
 <script setup lang="ts">
 import {
   BaseButton,
-  ShgButton,
   ShgCard,
   ShgForm,
   ShgLayout,
   ShgPasswordField,
-  ShgTextarea,
   ShgTextField,
   type LayoutNavigationItem,
   type ShgFormRef,
 } from 'erp-template-vuetify-components';
 import { ref } from 'vue';
+import GeneralTab from './GeneralTab.vue';
+import SelectVendorTab from './SelectVendorTab.vue';
 
 const navigationItems = ref<LayoutNavigationItem[]>([
+  { label: 'Select Vendor', value: 'select-vendor' },
   { label: 'General', value: 'general' },
   { label: 'User', value: 'user' },
 ]);

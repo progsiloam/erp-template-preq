@@ -65,6 +65,10 @@ const navigationMenuItems = ref<NavigationMenu[]>([
     ],
   },
   {
+    name: 'Vendor',
+    children: [{ name: 'Create PQ', path: '/questionaire/submit', icon: 'mdi-list-box-outline' }],
+  },
+  {
     name: 'Form',
     children: [{ name: 'Example Form PreQ', path: '/form-preq', icon: 'mdi-list-box-outline' }],
   },

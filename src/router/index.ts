@@ -59,6 +59,11 @@ const router = createRouter({
               name: 'createQuestionaire',
               component: () => import('@/views/dashboard/questionnaire/create/index.new.vue'),
             },
+            {
+              path: 'submit',
+              name: 'submitQuestionaire',
+              component: () => import('@/views/dashboard/vendor/submit/index.vue'),
+            },
           ],
         },
         {
