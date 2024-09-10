@@ -1,9 +1,11 @@
 import ShgUseForm from '@/hooks';
 import { defineStore } from 'pinia';
+import { useRouter } from 'vue-router';
 import type { CreateQuestionDTO } from './type';
 
-
 export const useNewQuestion = defineStore('useNewQuestion.store', () => {
+  const router = useRouter();
+
   const addOptions = () => {
     values.value.options.push({
       option_text: {
@@ -54,6 +56,7 @@ export const useNewQuestion = defineStore('useNewQuestion.store', () => {
       }
 
       alert('Question created successfully  🎉');
+      router.push({ name: 'questionOverview' });
     } catch (e) {
       if (e instanceof Error) {
         alert(e.message);
