@@ -1,11 +1,6 @@
 <template>
   <ShgCard title="General">
     <v-sheet class="text-body-2 mx-auto mb-4">
-      <p>form</p>
-      <pre>
-				{{ createSubmissionStore.valuesGeneral }}
-			</pre
-      >
       <p class="text-body-1 font-weight-bold">PT. Green Water</p>
       <table>
         <tr>
@@ -49,9 +44,49 @@
       <ShgAutocomplete
         v-model="createSubmissionStore.valuesGeneral.years_of_establishment[0]"
         :required="true"
-        :items="['Before 1900', '1900-1950', '1951-2000', '2001-2010', '2011-2020', 'After 2020']"
+        :items="
+          ['Before 1900', '1900-1950', '1951-2000', '2001-2010', '2011-2020', 'After 2020'].map((data) => ({
+            label: data,
+            value: data,
+          }))
+        "
         label="Years of Establishment"
       />
+      <!-- <ShgFileUpload
+        :required="true"
+        label="Code of Conduct"
+        v-model="createSubmissionStore.valuesGeneral.code_of_conduct[0]"
+      /> -->
+      <v-col>
+        <h3 class="">Legal Documents</h3>
+      </v-col>
+      <!-- <ShgFileUploadWithExpiry
+        v-model="createSubmissionStore.valuesGeneral.product_list"
+        :required="true"
+        label="Product List"
+        name="Product List"
+      /> -->
+      <!-- <ShgFileUpload
+        :required="true"
+        label="ISO & Certificate Tambahan"
+        v-model="createSubmissionStore.valuesGeneral.iso[0]"
+      /> -->
+      <!-- <ShgFileUpload
+        :required="true"
+        label="Project Reference"
+        v-model="createSubmissionStore.valuesGeneral.project_reference[0]"
+      /> -->
+      <!-- <ShgFileUpload
+        :required="true"
+        label="Rekening Koran"
+        v-model="createSubmissionStore.valuesGeneral.checking_account[0]"
+      /> -->
+      <!-- <ShgFileUploadWithExpiry
+        v-model="createSubmissionStore.valuesGeneral.financial_statement"
+        :required="true"
+        label="Financial Statement"
+        name="Financial Statement"
+      /> -->
     </ShgForm>
 
     <template v-slot:actions>

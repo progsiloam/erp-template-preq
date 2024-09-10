@@ -12,8 +12,6 @@ const ShgUseForm = <T = unknown>({ initialValues }: IUseForm<T>) => {
   type IHandleSubmitSuccess = (values: T) => void;
 
   const handleSubmit = (onSuccess: IHandleSubmitSuccess, onError?: () => void) => {
-    console.log('form', form);
-
     return async () => {
       const isValid = await form.value?.validate();
       if (isValid) {

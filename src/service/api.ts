@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/pinia/auto.store';
+import { useAuthStore } from '@/pinia/auth.store';
 import type { Document } from './fetchDocument.type';
 import type { QuestionnaireType } from './fetchQuestionnaireTypes.type';
 import type { Question } from './fetchQuestionsPaginate.type';

@@ -5,15 +5,14 @@
         v-model="createSubmissionStore.valuesSelectVendor.vendor_name"
         label="Select vendor"
         textPlaceholder="Please select"
-        :items="authStore.userList"
+        :items="authStore.userList.map((user) => ({ label: user, value: user }))"
         disabled
       />
-      <ShgAutocomplete
-        v-model="createSubmissionStore.valuesSelectVendor.vendor_name"
-        label="Select vendor"
+      <ShgAutocompleteMulti
+        v-model="createSubmissionStore.valuesSelectVendor.selected_major"
+        label="Select major"
         textPlaceholder="Please select"
-        :items="authStore.userList"
-        disabled
+        :items="listMajor.map((major) => ({ label: major, value: major }))"
       />
     </ShgForm>
 
@@ -24,9 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '@/pinia/auto.store';
-import { ShgAutocomplete, ShgCard } from 'erp-template-vuetify-components';
+import { useAuthStore } from '@/pinia/auth.store';
+import { ShgAutocomplete, ShgAutocompleteMulti, ShgCard } from 'erp-template-vuetify-components';
+import { ref } from 'vue';
 import { useCreateSubmissionStore } from './useCreateSubmission';
+
+const listMajor = ref<string[]>(['Construction', 'ICT', 'Customer Service']);
 
 const createSubmissionStore = useCreateSubmissionStore();
 const authStore = useAuthStore();
