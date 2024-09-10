@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr v-for="questionnaire in questionnaires" :key="questionnaire._id">
-          <td>{{ questionnaire.sub_major }}</td>
+          <td>{{ questionnaire.major_of_bussiness }}</td>
           <td>{{ questionnaire.sections.length }}</td>
         </tr>
       </tbody>

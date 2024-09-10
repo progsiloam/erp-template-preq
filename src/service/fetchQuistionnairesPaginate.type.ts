@@ -1,4 +1,4 @@
-import { InputType, Lang } from '@/views/type';
+import type { InputType, Lang } from '@/views/type';
 
 interface Option {
   option_text: Lang;
@@ -20,7 +20,7 @@ interface Section {
 
 interface Questionnaire {
   _id: string;
-  sub_major: string;
+  major_of_bussiness: string;
   sections: Section[];
   evaluators: string[];
   version: number;

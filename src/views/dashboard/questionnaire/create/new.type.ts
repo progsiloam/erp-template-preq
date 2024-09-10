@@ -2,7 +2,7 @@ import type { InputType, Lang } from '@/views/type';
 
 interface Options {
   option_text: Lang;
-  option_score?: number;
+  option_score: number;
 }
 
 interface QuestionDTO {
@@ -19,7 +19,7 @@ interface SectionDTO {
 }
 
 interface CreateQuestionnaireDTO {
-  sub_major: string;
+  major_of_bussiness: string;
   sections: SectionDTO[];
 }
 

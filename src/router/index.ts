@@ -71,6 +71,11 @@ const router = createRouter({
           name: 'Example Form PreQ',
           component: ExampleFormPreQ,
         },
+        {
+          path: '/document-collection',
+          name: 'documentCollection',
+          component: () => import('@/views/dashboard/document-collection/index.vue'),
+        },
       ],
     },
   ],

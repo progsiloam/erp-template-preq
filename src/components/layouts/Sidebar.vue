@@ -72,6 +72,7 @@ const navigationMenuItems = ref<NavigationMenu[]>([
     name: 'Form',
     children: [{ name: 'Example Form PreQ', path: '/form-preq', icon: 'mdi-list-box-outline' }],
   },
+  { name: 'Document Collection', path: '/document-collection', icon: 'mdi-list-box-outline' },
   { name: 'External Links' },
   { name: 'Google', path: 'https://www.google.com', icon: 'mdi-google', asHref: true },
 ]);
