@@ -75,7 +75,7 @@ const navigationMenuItems = ref<NavigationMenu[]>([
   {
     name: 'Document Collection',
     children: [
-      { name: 'View Mode', path: '/document-collection/view', icon: 'mdi-file-document-outline' },
+      { name: 'View Mode', path: '/document-collection', icon: 'mdi-file-document-outline' },
       { name: 'Reject', path: '/document-collection/reject', icon: 'mdi-file-document-outline' },
     ],
   },
