@@ -1,9 +1,9 @@
 <template>
+  <!-- <p>layout</p>
   <pre>
-		{{ navigationItems }}
+		{{ draft?.questionnaires[0] }}
 	</pre
-  >
-
+  > -->
   <ShgLayout :navigation-items="navigationItems">
     <template v-slot:contents="{ activeItemValue }">
       <div v-if="'Select Vendor' === activeItemValue">
@@ -16,7 +16,7 @@
 
       <div v-for="item in [...navigationItems].splice(2)" :key="item.value">
         <div v-if="item.value == `${activeItemValue}`">
-          <MajorTab :name="item.label" />
+          <MajorTab :questionnaire="JSON.parse(JSON.stringify(draft!.questionnaires[item.value as number]))" />
         </div>
       </div>
     </template>
@@ -37,7 +37,7 @@ const navigationItems = ref<LayoutNavigationItem[]>([
   { label: 'General', value: 'General' },
 ]);
 
-const draft = ref<Partial<SubmissionAttributes>>({});
+const draft = ref<SubmissionAttributes | null>();
 
 onMounted(async () => {
   const data = submission;
@@ -47,7 +47,7 @@ onMounted(async () => {
     ...toRaw(navigationItems.value),
     ...data.questionnaires.map((questionnaire, idx) => ({
       label: questionnaire.name,
-      value: `'${idx}'`,
+      value: idx,
     })),
   ];
 });

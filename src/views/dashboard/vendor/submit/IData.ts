@@ -28,6 +28,7 @@ interface QuestionAttributes {
   is_marked?: boolean;
   comment?: string;
   total_score?: number;
+  is_required: boolean;
 }
 
 interface Evaluation {
@@ -72,7 +73,7 @@ interface SectionQuestion {
 
 interface QuestionnaireAttribute {
   name: string;
-  section: SectionQuestion[];
+  sections: SectionQuestion[];
 }
 
 interface SubmissionAttributes {
