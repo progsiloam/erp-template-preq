@@ -17,7 +17,7 @@
                 v-model="values.input_type"
                 label="Select an Option of Input Type"
                 textPlaceholder="Please select"
-                :items="[...inputType]"
+                :items="[...inputType].map((type) => ({ label: type, value: type }))"
               />
             </div>
           </v-col>

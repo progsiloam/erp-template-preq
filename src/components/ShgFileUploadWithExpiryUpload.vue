@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import useShgForm from '@/composables/shg-use-form';
+import ShgUseForm from '@/hooks';
 import { DocumentService } from '@/services/document.service';
 import { BaseButton, BaseDialog, ShgDatePicker, ShgFileUpload, ShgForm } from 'erp-template-vuetify-components';
 import { closeDialog } from 'vue3-promise-dialog';
@@ -24,7 +24,7 @@ type FormDTO = {
   date: string;
 };
 
-const { form, handleSubmit, values } = useShgForm<FormDTO>({});
+const { form, handleSubmit, values } = ShgUseForm<FormDTO>({});
 
 const onSubmit = handleSubmit(async (value) => {
   console.log(value);
