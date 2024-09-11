@@ -2,7 +2,7 @@
   <v-app-bar>
     <v-app-bar-nav-icon @click="navStore.expandMenu"></v-app-bar-nav-icon>
 
-    <v-app-bar-title>
+    <v-app-bar-title class="mr-5">
       <v-row align="center">
         <v-col>
           <v-menu>
@@ -25,10 +25,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useAuthStore } from '@/pinia/auto.store';
+import { useAuthStore } from '@/pinia/auth.store';
 import { useNavStore } from '@/stores';
 import { BaseButton } from 'erp-template-vuetify-components';
-import { ref } from 'vue';
 
 const navStore = useNavStore();
 

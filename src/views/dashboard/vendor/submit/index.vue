@@ -1,94 +1,54 @@
 <template>
+  <!-- <p>layout</p>
+  <pre>
+		{{ draft?.questionnaires[0] }}
+	</pre
+  > -->
   <ShgLayout :navigation-items="navigationItems">
     <template v-slot:contents="{ activeItemValue }">
-      <div v-if="'select-vendor' === activeItemValue">
+      <div v-if="'Select Vendor' === activeItemValue">
         <SelectVendorTab />
       </div>
 
-      <div v-if="'general' === activeItemValue">
+      <div v-if="'General' === activeItemValue">
         <GeneralTab />
       </div>
 
-      <ShgCard v-if="navigationItems[2].value === activeItemValue" :title="navigationItems[2].label">
-        <ShgForm :columns="1" ref="userForm">
-          <ShgTextField v-model="userData.username" label="Username" :required="true" />
-          <ShgTextField v-model="userData.email" label="Email" :required="true" :rules="['email']" />
-          <ShgPasswordField v-model="userData.password" label="Password" :required="true" :rules="['password']" />
-          <ShgPasswordField
-            v-model="userData.confirmPassword"
-            label="Confirm Password"
-            :required="true"
-            :rules="['confirmed:@Password']"
-          />
-        </ShgForm>
-
-        <template v-slot:actions>
-          <BaseButton @click="register">Register</BaseButton>
-        </template>
-      </ShgCard>
+      <div v-for="item in [...navigationItems].splice(2)" :key="item.value">
+        <div v-if="item.value == `${activeItemValue}`">
+          <MajorTab :questionnaire="JSON.parse(JSON.stringify(draft!.questionnaires[item.value as number]))" />
+        </div>
+      </div>
     </template>
   </ShgLayout>
 </template>
 
 <script setup lang="ts">
-import {
-  BaseButton,
-  ShgCard,
-  ShgForm,
-  ShgLayout,
-  ShgPasswordField,
-  ShgTextField,
-  type LayoutNavigationItem,
-  type ShgFormRef,
-} from 'erp-template-vuetify-components';
-import { ref } from 'vue';
+import { ShgLayout, type LayoutNavigationItem } from 'erp-template-vuetify-components';
+import { onMounted, ref, toRaw } from 'vue';
+import { submission } from './data';
 import GeneralTab from './GeneralTab.vue';
+import type { SubmissionAttributes } from './IData';
+import MajorTab from './MajorTab.vue';
 import SelectVendorTab from './SelectVendorTab.vue';
 
 const navigationItems = ref<LayoutNavigationItem[]>([
-  { label: 'Select Vendor', value: 'select-vendor' },
-  { label: 'General', value: 'general' },
-  { label: 'User', value: 'user' },
+  { label: 'Select Vendor', value: 'Select Vendor' },
+  { label: 'General', value: 'General' },
 ]);
 
-const { generalForm, generalData, submit } = useGeneralForm();
-const { userForm, userData, register } = useUserForm();
+const draft = ref<SubmissionAttributes | null>();
 
-function useGeneralForm() {
-  const generalForm = ref<ShgFormRef>();
-  const generalData = ref({
-    firstName: '',
-    lastName: '',
-    email: '',
-    address: '',
-  });
+onMounted(async () => {
+  const data = submission;
+  draft.value = data;
 
-  const submit = async () => {
-    const isValid = await generalForm.value?.validate();
-    if (isValid) {
-      alert('Success Submit');
-    }
-  };
-
-  return { generalForm, generalData, submit };
-}
-
-function useUserForm() {
-  const userForm = ref<ShgFormRef>();
-  const userData = ref({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
-
-  const register = async () => {
-    const isValid = await userForm.value?.validate();
-    if (isValid) {
-      alert('Success Register');
-    }
-  };
-
-  return { userForm, userData, register };
-}
+  navigationItems.value = [
+    ...toRaw(navigationItems.value),
+    ...data.questionnaires.map((questionnaire, idx) => ({
+      label: questionnaire.name,
+      value: idx,
+    })),
+  ];
+});
 </script>

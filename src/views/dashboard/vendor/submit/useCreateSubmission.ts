@@ -1,5 +1,5 @@
 import ShgUseForm from '@/hooks';
-import { useAuthStore } from '@/pinia/auto.store';
+import { useAuthStore } from '@/pinia/auth.store';
 import { defineStore } from 'pinia';
 
 type IFormSelectVendor = {
