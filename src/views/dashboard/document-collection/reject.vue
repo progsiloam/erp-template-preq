@@ -11,7 +11,7 @@
             <div class="d-flex ga-2 me-3">
               <BaseButton color="secondary">Reset</BaseButton>
               <BaseButton color="secondary">Cancel</BaseButton>
-              <BaseButton color="success">Approve</BaseButton>
+              <BaseButton color="danger">Reject</BaseButton>
             </div>
             <v-divider vertical class="me-4"></v-divider>
             <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
@@ -78,6 +78,7 @@
                 <tbody>
                   <tr v-for="item in submission" :key="item.question">
                     <td><ShgCheckbox /></td>
+                    ``
                     <td>{{ item.question ?? '-' }}</td>
                     <td>{{ item.answer ?? '-' }}</td>
                     <td>
