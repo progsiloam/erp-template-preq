@@ -4,16 +4,16 @@
       <v-row align="start" justify="end" no-gutters>
         <v-col cols="6">
           <ShgAutocomplete
-            v-model="values.sub_major"
+            v-model="values.major_of_bussiness"
             label="Major of Bussiness"
             textPlaceholder="Please Select Major of Bussiness"
-            :items="quisionerTypeList.map((q) => q.type)"
+            :items="quisionerTypeList.map((q) => ({ label: q.type.toUpperCase(), value: q.type }))"
             :required="true"
           />
         </v-col>
         <v-col cols="auto">
           <div class="pa-3" style="margin-top: 19.95px">
-            <BaseButton color="primary" @click="useNewQuestionnaire.addSections" :disabled="values.sub_major === ''"
+            <BaseButton color="primary" @click="useNewQuestionnaire.addSections" :disabled="values.major_of_bussiness === ''"
               >Add section</BaseButton
             >
           </div>
@@ -95,7 +95,7 @@
                             v-model="values.sections[sIndex].questions[qIndex].input_type"
                             label="Type Question"
                             textPlaceholder="Please Select Type Question"
-                            :items="[...inputType]"
+                            :items="inputType.map((type) => ({ label: type, value: type }))"
                           />
                         </v-col>
                       </v-row>

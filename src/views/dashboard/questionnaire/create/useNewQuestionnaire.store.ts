@@ -33,7 +33,7 @@ export const useCreateQuestionnaire = defineStore('useCreateQuestionnairem', () 
   const { values, handleSubmit, form } = ShgUseForm<CreateQuestionnaireDTO>({
     initialValues: {
       sections: [],
-      sub_major: '',
+      major_of_bussiness: '',
     },
   });
 
@@ -41,7 +41,7 @@ export const useCreateQuestionnaire = defineStore('useCreateQuestionnairem', () 
     const val = JSON.parse(JSON.stringify(values)) as CreateQuestionnaireDTO;
 
     try {
-      const res = await fetch('http://localhost:3001/api/question-questionnaire', {
+      const res = await fetch('http://localhost:3001/api/questionnaire', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

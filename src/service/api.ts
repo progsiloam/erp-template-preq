@@ -46,11 +46,11 @@ export function fetchQuestionnaireTypes(): Promise<ApiResponse<QuestionnaireType
 }
 
 export function fetchQuistionnairesPaginate(): Promise<ApiResponse<Questionnaire[]>> {
-  return fetchFromApi<Questionnaire[]>('http://localhost:3001/api/question-questionnaire');
+  return fetchFromApi<Questionnaire[]>('http://localhost:3001/api/questionnaire');
 }
 
 export function fetchQuistionnairesById(id: string): Promise<ApiResponse<Questionnaire>> {
-  return fetchFromApi<Questionnaire>(`http://localhost:3001/api/question-questionnaire/${id}`);
+  return fetchFromApi<Questionnaire>(`http://localhost:3001/api/questionnaire/${id}`);
 }
 
 export function fetchSubmissionPaginate(): Promise<ApiResponse<Submission[]>> {
