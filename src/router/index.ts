@@ -74,7 +74,18 @@ const router = createRouter({
         {
           path: '/document-collection',
           name: 'documentCollection',
-          component: () => import('@/views/dashboard/document-collection/index.vue'),
+          children: [
+            {
+              path: '',
+              name: 'documentCollectionOverview',
+              component: () => import('@/views/dashboard/document-collection/index.vue'),
+            },
+            {
+              path: 'reject',
+              name: 'rejectDocumentCollection',
+              component: () => import('@/views/dashboard/document-collection/reject.vue'),
+            },
+          ],
         },
       ],
     },

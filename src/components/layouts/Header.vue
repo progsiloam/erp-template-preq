@@ -19,12 +19,6 @@
             </v-list>
           </v-menu>
         </v-col>
-        <v-col cols="auto">
-          <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
-            <v-btn value="eng">eng</v-btn>
-            <v-btn value="id">id</v-btn>
-          </v-btn-toggle>
-        </v-col>
       </v-row>
     </v-app-bar-title>
   </v-app-bar>
@@ -32,14 +26,11 @@
 
 <script lang="ts" setup>
 import { useAuthStore } from '@/pinia/auto.store';
-import { useLangStore } from '@/pinia/lang.store';
 import { useNavStore } from '@/stores';
 import { BaseButton } from 'erp-template-vuetify-components';
 import { ref } from 'vue';
 
 const navStore = useNavStore();
-
-const langStore = useLangStore();
 
 const authStore = useAuthStore();
 
