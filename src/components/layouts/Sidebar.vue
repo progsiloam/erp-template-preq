@@ -83,7 +83,11 @@ const navigationMenuItems = ref<NavigationMenu[]>([
   },
   {
     name: 'Document Pre Scoring',
-    children: [{ name: 'VM Scoring view', path: '/document-pre-scoring', icon: 'mdi-file-document-outline' }],
+    children: [
+      { name: 'VM Scoring view', path: '/document-pre-scoring-vm', icon: 'mdi-file-document-outline' },
+      { name: 'SME Scoring view', path: '/document-pre-scoring-sme', icon: 'mdi-file-document-outline' },
+      { name: 'HM Scoring view', path: '/document-pre-scoring-hm', icon: 'mdi-file-document-outline' },
+    ],
   },
   { name: 'External Links' },
   { name: 'Google', path: 'https://www.google.com', icon: 'mdi-google', asHref: true },

@@ -9,9 +9,9 @@
         <v-col cols="6">
           <div class="d-flex justify-end">
             <div class="d-flex ga-2 me-3">
-              <BaseButton color="danger">Reject</BaseButton>
+              <ShgButton type="reject" />
               <ShgButton type="revise" />
-              <ShgButton type="approve"></ShgButton>
+              <ShgButton type="approve" />
             </div>
             <v-divider vertical class="me-4"></v-divider>
             <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
@@ -137,7 +137,6 @@
 <script setup lang="ts">
 import { useLangStore } from '@/pinia/lang.store';
 import {
-  BaseButton,
   BaseButtonIcon,
   type LayoutNavigationItem,
   ShgButton,

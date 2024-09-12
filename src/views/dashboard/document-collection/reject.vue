@@ -10,8 +10,8 @@
           <div class="d-flex justify-end">
             <div class="d-flex ga-2 me-3">
               <BaseButton color="secondary">Reset</BaseButton>
-              <BaseButton color="secondary">Cancel</BaseButton>
-              <BaseButton color="danger">Reject</BaseButton>
+              <ShgButton type="cancel" />
+              <ShgButton type="reject" />
             </div>
             <v-divider vertical class="me-4"></v-divider>
             <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
@@ -122,6 +122,7 @@ import {
   BaseButton,
   BaseButtonIcon,
   type LayoutNavigationItem,
+  ShgButton,
   ShgCard,
   ShgCheckbox,
   ShgLayout,

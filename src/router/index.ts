@@ -98,18 +98,50 @@ const router = createRouter({
           ],
         },
         {
-          path: '/document-pre-scoring',
-          name: 'documentPreScoring',
+          path: '/document-pre-scoring-vm',
+          name: 'documentPreScoringVM',
           children: [
             {
               path: '',
-              name: 'documentPreScoringEvaluation',
+              name: 'documentPreScoringVMOverview',
               component: () => import('@/views/dashboard/document-pre-scoring/VM/index.vue'),
             },
             {
               path: '{doc_id}',
-              name: 'documentPreScoringVM',
+              name: 'documentPreScoringVMDetail',
               component: () => import('@/views/dashboard/document-pre-scoring/VM/Vmscoring.vue'),
+            },
+          ],
+        },
+        {
+          path: '/document-pre-scoring-sme',
+          name: 'documentPreScoringSME',
+          children: [
+            {
+              path: '',
+              name: 'documentPreScoringSMEOverview',
+              component: () => import('@/views/dashboard/document-pre-scoring/SME/index.vue'),
+            },
+            {
+              path: '{doc_id}',
+              name: 'documentPreScoringSMEDetail',
+              component: () => import('@/views/dashboard/document-pre-scoring/SME/Smescoring.vue'),
+            },
+          ],
+        },
+        {
+          path: '/document-pre-scoring-hm',
+          name: 'documentPreScoringHM',
+          children: [
+            {
+              path: '',
+              name: 'documentPreScoringHMOverview',
+              component: () => import('@/views/dashboard/document-pre-scoring/HM/index.vue'),
+            },
+            {
+              path: '{doc_id}',
+              name: 'documentPreScoringHMDetail',
+              component: () => import('@/views/dashboard/document-pre-scoring/HM/Hmscoring.vue'),
             },
           ],
         },
