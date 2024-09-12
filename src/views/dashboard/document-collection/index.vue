@@ -10,8 +10,8 @@
           <div class="d-flex justify-end">
             <div class="d-flex ga-2 me-3">
               <BaseButton color="danger">Reject</BaseButton>
-              <BaseButton color="warning">Revise</BaseButton>
-              <BaseButton color="success">Approve</BaseButton>
+              <ShgButton type="revise" />
+              <ShgButton type="approve"></ShgButton>
             </div>
             <v-divider vertical class="me-4"></v-divider>
             <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
@@ -136,7 +136,14 @@
 
 <script setup lang="ts">
 import { useLangStore } from '@/pinia/lang.store';
-import { BaseButton, BaseButtonIcon, type LayoutNavigationItem, ShgCard, ShgLayout } from 'erp-template-vuetify-components';
+import {
+  BaseButton,
+  BaseButtonIcon,
+  type LayoutNavigationItem,
+  ShgButton,
+  ShgCard,
+  ShgLayout,
+} from '@siloamhospitals/erp-template-vuetify-components';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 

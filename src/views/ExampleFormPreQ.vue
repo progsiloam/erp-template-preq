@@ -56,7 +56,7 @@ import {
   ShgTextField,
   type LayoutNavigationItem,
   type ShgFormRef,
-} from 'erp-template-vuetify-components';
+} from '@siloamhospitals/erp-template-vuetify-components';
 import { ref } from 'vue';
 
 const navigationItems = ref<LayoutNavigationItem[]>([

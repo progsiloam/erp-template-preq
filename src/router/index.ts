@@ -97,6 +97,22 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: '/document-pre-scoring',
+          name: 'documentPreScoring',
+          children: [
+            {
+              path: '',
+              name: 'documentPreScoringEvaluation',
+              component: () => import('@/views/dashboard/document-pre-scoring/VM/index.vue'),
+            },
+            {
+              path: '{doc_id}',
+              name: 'documentPreScoringVM',
+              component: () => import('@/views/dashboard/document-pre-scoring/VM/Vmscoring.vue'),
+            },
+          ],
+        },
       ],
     },
   ],

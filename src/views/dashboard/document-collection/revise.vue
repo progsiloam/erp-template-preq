@@ -117,7 +117,7 @@ import {
   ShgCard,
   ShgCheckbox,
   ShgLayout,
-} from 'erp-template-vuetify-components';
+} from '@siloamhospitals/erp-template-vuetify-components';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
