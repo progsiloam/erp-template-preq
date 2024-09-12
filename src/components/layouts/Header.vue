@@ -27,7 +27,7 @@
 <script lang="ts" setup>
 import { useAuthStore } from '@/pinia/auth.store';
 import { useNavStore } from '@/stores';
-import { BaseButton } from 'erp-template-vuetify-components';
+import { BaseButton } from '@siloamhospitals/erp-template-vuetify-components';
 
 const navStore = useNavStore();
 

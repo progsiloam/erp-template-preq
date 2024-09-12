@@ -41,7 +41,7 @@
 <script setup lang="ts">
 import { fetchQuestionsPaginate } from '@/service/api';
 import type { Question } from '@/service/fetchQuestionsPaginate.type';
-import { BaseButton, BaseDialog, ShgTextField } from 'erp-template-vuetify-components';
+import { BaseButton, BaseDialog, ShgTextField } from '@siloamhospitals/erp-template-vuetify-components';
 import { onMounted, ref, watch } from 'vue';
 import { closeDialog } from 'vue3-promise-dialog';
 

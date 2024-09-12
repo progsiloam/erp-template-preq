@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { useNavStore } from '@/stores';
 import type { NavigationMenu } from '@/types/navigationMenu.type';
-import { Logo, Submark } from 'erp-template-vuetify-components';
+import { Logo, Submark } from '@siloamhospitals/erp-template-vuetify-components';
 import { storeToRefs } from 'pinia';
 import { computed, ref } from 'vue';
 import { useDisplay } from 'vuetify';
@@ -76,8 +76,14 @@ const navigationMenuItems = ref<NavigationMenu[]>([
     name: 'Document Collection',
     children: [
       { name: 'View Mode', path: '/document-collection/view', icon: 'mdi-file-document-outline' },
+      { name: 'Approve', path: '/document-collection/approve', icon: 'mdi-file-document-outline' },
+      { name: 'Revise', path: '/document-collection/revise', icon: 'mdi-file-document-outline' },
       { name: 'Reject', path: '/document-collection/reject', icon: 'mdi-file-document-outline' },
     ],
+  },
+  {
+    name: 'Document Pre Scoring',
+    children: [{ name: 'VM Scoring view', path: '/document-pre-scoring', icon: 'mdi-file-document-outline' }],
   },
   { name: 'External Links' },
   { name: 'Google', path: 'https://www.google.com', icon: 'mdi-google', asHref: true },

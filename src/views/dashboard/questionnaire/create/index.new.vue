@@ -161,7 +161,7 @@ import {
   ShgForm,
   ShgNumeric,
   ShgTextField,
-} from 'erp-template-vuetify-components';
+} from '@siloamhospitals/erp-template-vuetify-components';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { openDialog } from 'vue3-promise-dialog';

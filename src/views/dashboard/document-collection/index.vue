@@ -10,14 +10,15 @@
           <div class="d-flex justify-end">
             <div class="d-flex ga-2 me-3">
               <BaseButton color="danger">Reject</BaseButton>
-              <BaseButton color="warning">Revise</BaseButton>
-              <BaseButton color="success">Approve</BaseButton>
+              <ShgButton type="revise" />
+              <ShgButton type="approve"></ShgButton>
             </div>
             <v-divider vertical class="me-4"></v-divider>
             <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
               <v-btn value="eng">eng</v-btn>
               <v-btn value="id">id</v-btn>
             </v-btn-toggle>
+            <BaseButtonIcon icon="mdi-alpha-x" color="secondary" class="ms-3" @click="toBackCollectionView" />
           </div>
         </v-col>
       </v-row>
@@ -134,17 +135,30 @@
 </template>
 
 <script setup lang="ts">
-import { type LayoutNavigationItem, ShgCard, ShgLayout, BaseButton } from 'erp-template-vuetify-components';
-import { onMounted, onUnmounted, ref } from 'vue';
 import { useLangStore } from '@/pinia/lang.store';
+import {
+  BaseButton,
+  BaseButtonIcon,
+  type LayoutNavigationItem,
+  ShgButton,
+  ShgCard,
+  ShgLayout,
+} from '@siloamhospitals/erp-template-vuetify-components';
+import { onMounted, onUnmounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const langStore = useLangStore();
 const tab = ref('General');
+const router = useRouter();
 
 const navigationItems = ref<LayoutNavigationItem[]>([
   { label: 'General', value: 'general' },
   { label: 'Contruction', value: 'contruction' },
 ]);
+
+const toBackCollectionView = () => {
+  router.push({ name: 'documentCollectionOverview' });
+};
 
 const submission = [
   {

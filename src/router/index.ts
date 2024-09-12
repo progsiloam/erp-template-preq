@@ -2,7 +2,6 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import AboutView from '@/views/AboutView.vue';
 import ExampleFormPreQ from '@/views/ExampleFormPreQ.vue';
 import HomeView from '@/views/HomeView.vue';
-import Test from '@/views/Test.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -77,9 +76,19 @@ const router = createRouter({
           name: 'documentCollection',
           children: [
             {
-              path: '',
+              path: 'view',
               name: 'documentCollectionOverview',
               component: () => import('@/views/dashboard/document-collection/index.vue'),
+            },
+            {
+              path: 'approve',
+              name: 'approveDocumentCollection',
+              component: () => import('@/views/dashboard/document-collection/approve.vue'),
+            },
+            {
+              path: 'revise',
+              name: 'reviseDocumentCollection',
+              component: () => import('@/views/dashboard/document-collection/revise.vue'),
             },
             {
               path: 'reject',
@@ -92,6 +101,22 @@ const router = createRouter({
           path: '/test',
           name: 'Example Form PreQ',
           component: Test,
+        },
+        {
+          path: '/document-pre-scoring',
+          name: 'documentPreScoring',
+          children: [
+            {
+              path: '',
+              name: 'documentPreScoringEvaluation',
+              component: () => import('@/views/dashboard/document-pre-scoring/VM/index.vue'),
+            },
+            {
+              path: '{doc_id}',
+              name: 'documentPreScoringVM',
+              component: () => import('@/views/dashboard/document-pre-scoring/VM/Vmscoring.vue'),
+            },
+          ],
         },
       ],
     },

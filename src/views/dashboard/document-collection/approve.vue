@@ -10,8 +10,8 @@
           <div class="d-flex justify-end">
             <div class="d-flex ga-2 me-3">
               <BaseButton color="secondary">Reset</BaseButton>
-              <BaseButton color="secondary">Cancel</BaseButton>
-              <BaseButton color="danger">Reject</BaseButton>
+              <ShgButton type="cancel" />
+              <ShgButton type="approve" />
             </div>
             <v-divider vertical class="me-4"></v-divider>
             <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
@@ -105,9 +105,33 @@
         <template v-slot:options>
           <v-card class="pa-4">
             <div class="mb-2">
-              <h4 class="">Notes <span class="text-danger">*</span></h4>
+              <h5>
+                SCORE BY SYSTEM
+                <v-icon class="ml-1 text-medium-emphasis" icon="mdi-information-outline"></v-icon>
+              </h5>
             </div>
-            <v-textarea v-model="notes" variant="outlined" placeholder="Give notes regarding the documents"></v-textarea>
+            <v-divider class="mb-3"></v-divider>
+            <div class="d-flex flex-column ga-1 mb-3">
+              <div class="d-flex flex-row justify-space-between">
+                <p class="font-weight-medium text-medium-emphasis">General Section</p>
+                <p class="font-weight-bold">90</p>
+              </div>
+              <div class="d-flex flex-row justify-space-between">
+                <p class="font-weight-medium text-medium-emphasis">Contructions</p>
+                <p class="font-weight-bold">80</p>
+              </div>
+            </div>
+            <v-divider></v-divider>
+            <div class="d-flex flex-row justify-space-between mt-2">
+              <p class="font-weight-medium text-medium-emphasis">Total Score</p>
+              <p class="font-weight-bold text-blue">170</p>
+            </div>
+            <v-divider class="my-3"></v-divider>
+            <h5>
+              CORRECTED SCORE
+              <v-icon class="ml-1 text-medium-emphasis" icon="mdi-information-outline"></v-icon>
+            </h5>
+            <BaseButton color="primary" class="mt-3 w-100">Score Correction</BaseButton>
           </v-card>
         </template>
         {{ activeItemValue }}
@@ -122,6 +146,7 @@ import {
   BaseButton,
   BaseButtonIcon,
   type LayoutNavigationItem,
+  ShgButton,
   ShgCard,
   ShgCheckbox,
   ShgLayout,
@@ -129,20 +154,19 @@ import {
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const tab = ref('General');
-const notes = ref<string>('');
 const langStore = useLangStore();
+const tab = ref('General');
 const router = useRouter();
 const isMarked = ref<boolean>(false);
-
-const toBackCollectionView = () => {
-  router.push({ name: 'documentCollectionOverview' });
-};
 
 const navigationItems = ref<LayoutNavigationItem[]>([
   { label: 'General', value: 'general' },
   { label: 'Contruction', value: 'contruction' },
 ]);
+
+const toBackCollectionView = () => {
+  router.push({ name: 'documentCollectionOverview' });
+};
 
 const submission = [
   {

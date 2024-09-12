@@ -1,4 +1,4 @@
-import { setNumeralLocaleID, ShgComponent } from 'erp-template-vuetify-components';
+import { setNumeralLocaleID, ShgComponent } from '@siloamhospitals/erp-template-vuetify-components';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import App from './App.vue';

@@ -88,7 +88,14 @@
 
 <script setup lang="ts">
 import { inputType } from '@/views/type';
-import { BaseButton, ShgAutocomplete, ShgButton, ShgCard, ShgForm, ShgTextField } from 'erp-template-vuetify-components';
+import {
+  BaseButton,
+  ShgAutocomplete,
+  ShgButton,
+  ShgCard,
+  ShgForm,
+  ShgTextField,
+} from '@siloamhospitals/erp-template-vuetify-components';
 import { storeToRefs } from 'pinia';
 import { onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
