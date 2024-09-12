@@ -18,6 +18,7 @@
               <v-btn value="eng">eng</v-btn>
               <v-btn value="id">id</v-btn>
             </v-btn-toggle>
+            <BaseButtonIcon icon="mdi-alpha-x" color="secondary" class="ms-3" @click="toBackCollectionView" />
           </div>
         </v-col>
       </v-row>
@@ -41,7 +42,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="item in submission" :key="item.question">
-                    <td><ShgCheckbox /></td>
+                    <td><ShgCheckbox v-model="isMarked" field-name="1" label="" /></td>
                     <td>{{ item.question ?? '-' }}</td>
                     <td>{{ item.answer ?? '-' }}</td>
                     <td>
@@ -77,8 +78,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="item in submission" :key="item.question">
-                    <td><ShgCheckbox /></td>
-                    ``
+                    <td><ShgCheckbox v-model="isMarked" field-name="2" label="" /></td>
                     <td>{{ item.question ?? '-' }}</td>
                     <td>{{ item.answer ?? '-' }}</td>
                     <td>
@@ -117,13 +117,27 @@
 </template>
 
 <script setup lang="ts">
-import { type LayoutNavigationItem, ShgCard, ShgLayout, BaseButton, ShgCheckbox } from 'erp-template-vuetify-components';
-import { onMounted, onUnmounted, ref } from 'vue';
 import { useLangStore } from '@/pinia/lang.store';
+import {
+  BaseButton,
+  BaseButtonIcon,
+  type LayoutNavigationItem,
+  ShgCard,
+  ShgCheckbox,
+  ShgLayout,
+} from 'erp-template-vuetify-components';
+import { onMounted, onUnmounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const tab = ref('General');
 const notes = ref<string>('');
 const langStore = useLangStore();
+const router = useRouter();
+const isMarked = ref<boolean>(false);
+
+const toBackCollectionView = () => {
+  router.push({ name: 'documentCollectionOverview' });
+};
 
 const navigationItems = ref<LayoutNavigationItem[]>([
   { label: 'General', value: 'general' },

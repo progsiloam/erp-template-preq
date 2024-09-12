@@ -9,9 +9,9 @@
         <v-col cols="6">
           <div class="d-flex justify-end">
             <div class="d-flex ga-2 me-3">
-              <BaseButton color="danger">Reject</BaseButton>
-              <BaseButton color="warning">Revise</BaseButton>
-              <BaseButton color="success">Approve</BaseButton>
+              <BaseButton color="secondary">Reset</BaseButton>
+              <BaseButton color="secondary">Cancel</BaseButton>
+              <BaseButton color="warning">Ask to Revise</BaseButton>
             </div>
             <v-divider vertical class="me-4"></v-divider>
             <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
@@ -26,7 +26,6 @@
   </div>
   <ShgLayout :navigation-items="navigationItems">
     <template v-slot:contents="{ activeItemValue }">
-      <pre></pre>
       <ShgCard title="Document Collection">
         <v-expansion-panels multiple>
           <v-expansion-panel id="general" title="General" class="mb-5">
@@ -34,6 +33,7 @@
               <v-table>
                 <thead>
                   <tr>
+                    <th class="text-left" scope="col">Remark</th>
                     <th class="text-left" scope="col">Question</th>
                     <th class="text-left" scope="col">Answer</th>
                     <th class="text-left" scope="col">Attach</th>
@@ -42,6 +42,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="item in submission" :key="item.question">
+                    <td><ShgCheckbox v-model="isMarked" field-name="1" label="" /></td>
                     <td>{{ item.question ?? '-' }}</td>
                     <td>{{ item.answer ?? '-' }}</td>
                     <td>
@@ -68,6 +69,7 @@
               <v-table>
                 <thead>
                   <tr>
+                    <th class="text-left" scope="col">Remark</th>
                     <th class="text-left" scope="col">Question</th>
                     <th class="text-left" scope="col">Answer</th>
                     <th class="text-left" scope="col">Attach</th>
@@ -76,6 +78,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="item in submission" :key="item.question">
+                    <td><ShgCheckbox v-model="isMarked" field-name="2" label="" /></td>
                     <td>{{ item.question ?? '-' }}</td>
                     <td>{{ item.answer ?? '-' }}</td>
                     <td>
@@ -99,35 +102,6 @@
           </v-expansion-panel>
         </v-expansion-panels>
 
-        <template v-slot:options>
-          <v-card class="pa-4">
-            <div class="mb-2">
-              <h5>
-                Where the score coming from?
-                <v-icon class="ml-1 text-medium-emphasis" icon="mdi-information-outline"></v-icon>
-              </h5>
-            </div>
-            <v-divider></v-divider>
-            <h5 class="my-2">
-              SCORE BY SYSTEM <v-icon class="ml-1 text-medium-emphasis" icon="mdi-information-outline"></v-icon>
-            </h5>
-            <div class="d-flex flex-column ga-1 mb-3">
-              <div class="d-flex flex-row justify-space-between">
-                <p class="font-weight-medium text-medium-emphasis">General Section</p>
-                <p class="font-weight-bold">90</p>
-              </div>
-              <div class="d-flex flex-row justify-space-between">
-                <p class="font-weight-medium text-medium-emphasis">Contructions</p>
-                <p class="font-weight-bold">80</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <div class="d-flex flex-row justify-space-between mt-2">
-              <p class="font-weight-medium text-medium-emphasis">Total Score</p>
-              <p class="font-weight-bold text-blue">170</p>
-            </div>
-          </v-card>
-        </template>
         {{ activeItemValue }}
       </ShgCard>
     </template>
@@ -136,22 +110,30 @@
 
 <script setup lang="ts">
 import { useLangStore } from '@/pinia/lang.store';
-import { BaseButton, BaseButtonIcon, type LayoutNavigationItem, ShgCard, ShgLayout } from 'erp-template-vuetify-components';
+import {
+  BaseButton,
+  BaseButtonIcon,
+  type LayoutNavigationItem,
+  ShgCard,
+  ShgCheckbox,
+  ShgLayout,
+} from 'erp-template-vuetify-components';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const langStore = useLangStore();
 const tab = ref('General');
+const langStore = useLangStore();
 const router = useRouter();
+const isMarked = ref<boolean>(false);
+
+const toBackCollectionView = () => {
+  router.push({ name: 'documentCollectionOverview' });
+};
 
 const navigationItems = ref<LayoutNavigationItem[]>([
   { label: 'General', value: 'general' },
   { label: 'Contruction', value: 'contruction' },
 ]);
-
-const toBackCollectionView = () => {
-  router.push({ name: 'documentCollectionOverview' });
-};
 
 const submission = [
   {

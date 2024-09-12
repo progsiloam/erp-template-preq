@@ -76,9 +76,14 @@ const router = createRouter({
           name: 'documentCollection',
           children: [
             {
-              path: '',
+              path: 'view',
               name: 'documentCollectionOverview',
               component: () => import('@/views/dashboard/document-collection/index.vue'),
+            },
+            {
+              path: 'revise',
+              name: 'reviseDocumentCollection',
+              component: () => import('@/views/dashboard/document-collection/revise.vue'),
             },
             {
               path: 'reject',
