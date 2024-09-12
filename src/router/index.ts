@@ -2,6 +2,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import AboutView from '@/views/AboutView.vue';
 import ExampleFormPreQ from '@/views/ExampleFormPreQ.vue';
 import HomeView from '@/views/HomeView.vue';
+import Test from '@/views/Test.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -96,6 +97,16 @@ const router = createRouter({
               component: () => import('@/views/dashboard/document-collection/reject.vue'),
             },
           ],
+        },
+        {
+          path: '/test',
+          name: 'Example Form PreQ',
+          component: Test,
+        },
+        {
+          path: '/test',
+          name: 'Example Form PreQ',
+          component: Test,
         },
         {
           path: '/document-pre-scoring-vm',

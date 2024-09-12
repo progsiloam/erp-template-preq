@@ -24,6 +24,7 @@
     "@mdi/font": "7.4.47",
     "axios": "1.7.4",
     "@siloamhospitals/erp-template-vuetify-components": "2.0.2",
+    "encrypt-storage": "^2.13.3",
     "pinia": "2.2.1",
     "vee-validate": "^4.13.2",
     "vue": "3.4.37",
