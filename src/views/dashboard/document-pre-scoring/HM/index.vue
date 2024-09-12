@@ -2,14 +2,11 @@
   <h2 class="mb-3">Pre-Qualification List</h2>
   <v-container fluid>
     <v-row justify="start">
-      <v-col cols="5">
-        <div class="d-flex align-center">
-          <ShgDatePicker v-model="datePeriod" label="Date Period From" />
-          <ShgDatePicker v-model="datePeriod" label="Date Period To" />
-          <div class="mt-6 d-flex ga-3">
-            <ShgButton type="delete" />
-            <BaseButton color="secondary">History</BaseButton>
-          </div>
+      <v-col cols="12">
+        <div class="text-center bg-secondary pa-2">
+          <p class="text-grey-darken-2">
+            Time remaining for the current time period <span class="font-weight-bold">240 Days</span>
+          </p>
         </div>
       </v-col>
     </v-row>
@@ -33,14 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  BaseButton,
-  ShgAutocomplete,
-  ShgButton,
-  ShgDatePicker,
-  ShgTable,
-  ShgTextField,
-} from '@siloamhospitals/erp-template-vuetify-components';
+import { ShgAutocomplete, ShgButton, ShgTable, ShgTextField } from '@siloamhospitals/erp-template-vuetify-components';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -49,7 +39,7 @@ const selectedItem = ref<string>('');
 const search = ref<string>('');
 
 const handleDocumentScoring = (doc_id: number) => {
-  router.push({ name: 'documentPreScoringVMDetail', params: { doc_id: doc_id.toString() } });
+  router.push({ name: 'documentPreScoringHMDetail', params: { doc_id: doc_id.toString() } });
 };
 
 const columns = [

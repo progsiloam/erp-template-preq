@@ -171,7 +171,7 @@ const navigationItems = ref<LayoutNavigationItem[]>([
 ]);
 
 const toBackCollectionReviewView = () => {
-  router.push({ name: 'documentPreScoringVMOverview' });
+  router.push({ name: 'documentPreScoringSMEOverview' });
 };
 
 const submission = [

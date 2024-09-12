@@ -134,7 +134,6 @@
             </div>
             <v-divider class="mt-2"></v-divider>
             <ShgTextField label="Contruction" v-model="contruction" />
-            <ShgTextarea label="Notes Regarding the Score" placeholder="Vendor has been very cooperative" v-model="notes" />
           </v-card>
         </template>
         {{ activeItemValue }}
@@ -153,7 +152,6 @@ import {
   ShgCheckbox,
   ShgLayout,
   ShgTextField,
-  ShgTextarea,
 } from '@siloamhospitals/erp-template-vuetify-components';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -171,7 +169,7 @@ const navigationItems = ref<LayoutNavigationItem[]>([
 ]);
 
 const toBackCollectionReviewView = () => {
-  router.push({ name: 'documentPreScoringVMOverview' });
+  router.push({ name: 'documentPreScoringHMOverview' });
 };
 
 const submission = [
