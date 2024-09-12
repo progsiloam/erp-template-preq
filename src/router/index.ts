@@ -81,6 +81,11 @@ const router = createRouter({
               component: () => import('@/views/dashboard/document-collection/index.vue'),
             },
             {
+              path: 'approve',
+              name: 'approveDocumentCollection',
+              component: () => import('@/views/dashboard/document-collection/approve.vue'),
+            },
+            {
               path: 'revise',
               name: 'reviseDocumentCollection',
               component: () => import('@/views/dashboard/document-collection/revise.vue'),
