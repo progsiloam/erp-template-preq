@@ -1,31 +1,33 @@
 <template>
   <div>
-    <h1>This is an test page</h1>
-
+    <h1>data</h1>
+    <pre>
+	{{ values }}
+</pre
+    >
     <ShgForm ref="form" :columns="1">
-      <ShgFileUpload label="Upload" v-model="uploadData" :upload-file="uploadFile" />
+      <!-- <PreQFileUpload label="Upload" v-model="values.user_answer[0]" :required="true" /> -->
+      <PreQFileUploadWithExpiry
+        label="Documen IUP"
+        field-name="Documen IUP"
+        :required="false"
+        v-model="values.user_answer"
+      />
     </ShgForm>
+    <ShgButton type="save" @click="onSubmit">Submit</ShgButton>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useFile } from '@/composables';
+import PreQFileUploadWithExpiry from '@/components/PreQFileUploadWithExpiry.vue';
 import ShgUseForm from '@/hooks';
-import { ShgFileUpload, ShgForm, type UploadedFileData } from '@siloamhospitals/erp-template-vuetify-components';
-import { ref } from 'vue';
+import { ShgButton, ShgForm } from '@siloamhospitals/erp-template-vuetify-components';
 
 const { form, handleSubmit, values } = ShgUseForm<{ user_answer: string[] }>({
   initialValues: {
-    user_answer: ['66e2a9cde002a1274a128966'],
+    user_answer: ['2024-09-06', '66e3edb6c427fb9ea699f1b2'],
   },
 });
-
-const uploadData = ref<UploadedFileData | null>({
-  id: '66e2a9cde002a1274a128966',
-  file_name: 'WhatsApp Image 2024-09-12 at 11.02.52 (1).jpeg',
-});
-
-const { uploadFile, getFile } = useFile();
 
 const onSubmit = handleSubmit((values) => {
   console.log(values);

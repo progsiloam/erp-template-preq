@@ -29,13 +29,15 @@ export function useFile() {
     if (!result.is_success && !result.data) {
       throw new Error('broken');
     }
+
+    return result;
   };
 
-  const getFile: (id: string) => Promise<ResultType<File>> = async (id) => {
-    const result = await fetchFile(id);
+  const getFile: (id: string | number) => Promise<ResultType<File>> = async (id) => {
+    const result = await fetchFile(`${id}`);
 
     return {
-      data: base64ToFile(result.data.file_base64, result.data.filename),
+      data: base64ToFile(result.data!.file_base64, result.data!.filename),
       message: result.message,
       is_success: result.is_success,
     };
@@ -50,5 +52,17 @@ export function useFile() {
     return result;
   };
 
-  return { uploadFile, getFile, getFileData };
+  const deleteFile: (id: string | number) => Promise<ResultType> = async (id) => {
+    const url = `http://localhost:3001/api/submission/delete-file/${id}`;
+
+    const result = await axios.post(url);
+
+    if (!result.is_success) {
+      throw new Error('broken');
+    }
+
+    return result;
+  };
+
+  return { uploadFile, getFile, getFileData, deleteFile };
 }

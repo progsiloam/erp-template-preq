@@ -26,8 +26,7 @@ export function useAxios() {
 
       if (response.status === 200 && response.data) {
         if (response.data.code === 200) {
-          const a = Result.success<T>(response.data.data);
-          return a;
+          return Result.success<T>(response.data.data);
         } else {
           return Result.fail(response.data.message);
         }
