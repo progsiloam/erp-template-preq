@@ -1,4 +1,4 @@
-import type { ShgFormRef } from 'erp-template-vuetify-components';
+import type { ShgFormRef } from '@siloamhospitals/erp-template-vuetify-components';
 import { ref, toRaw } from 'vue';
 
 type IUseForm<T> = {
@@ -9,16 +9,17 @@ const ShgUseForm = <T = unknown>({ initialValues }: IUseForm<T>) => {
 
   const values = ref<T>(initialValues ?? ({} as T));
 
-  type IHandleSubmitSuccess = (values: T) => void;
-
-  const handleSubmit = (onSuccess: IHandleSubmitSuccess, onError?: () => void) => {
+  const handleSubmit = (onSuccess: (values: T) => void, onError?: (error: Record<string, string>) => void) => {
     return async () => {
-      const isValid = await form.value?.validate();
+      if (!form.value) {
+        throw new Error('Form is undefined');
+      }
+      const isValid = await form.value.validate();
       if (isValid) {
         onSuccess(toRaw(values.value) as T);
         return;
       }
-      onError?.();
+      onError?.(form.value.form.errors as unknown as Record<string, string>);
     };
   };
 

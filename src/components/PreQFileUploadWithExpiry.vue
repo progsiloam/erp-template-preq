@@ -1,12 +1,12 @@
 <template>
-  <v-col :id="componentName" cols="12" :md="columnSize">
-    <v-label v-if="label">
+  <v-col :id="id" cols="12" :md="columnSize">
+    <v-label v-if="label" class="mb-1">
       {{ label }}
     </v-label>
     <br />
 
     <!-- when file exist, show this detail -->
-    <div class="bg-grey-lighten-5 rounded-sm py-1" style="width: fit-content" v-if="fileDetail?._id">
+    <div class="bg-grey-lighten-5 rounded-sm py-1" style="width: fit-content" v-if="fileDetail?.id">
       <v-row no-gutters justify="center" align="center">
         <v-col cols="auto">
           <v-row no-gutters justify="center" align="center" class="flex-nowrap">
@@ -27,7 +27,7 @@
         </v-col>
 
         <v-col cols="auto">
-          <button class="bg-blue-lighten-5 text-blue-darken-1 px-1 py-1 rounded-sm" type="button">
+          <div class="bg-blue-lighten-5 text-blue-darken-1 px-1 py-1 rounded-sm">
             <v-row no-gutters justify="center" align="center" class="flex-nowrap">
               <v-col>
                 <div class="mx-1">
@@ -36,42 +36,30 @@
               </v-col>
               <v-col>
                 <div class="text-subtitle-2">
-                  {{ shortenFilename(fileDetail.filename) }}
+                  {{ shortenFilename(fileDetail.file_name) }}
                 </div>
               </v-col>
             </v-row>
-          </button>
-        </v-col>
-
-        <v-col cols="auto">
-          <div class="mx-1" @click="handleUpdateExpiredDate">
-            <button class="text-blue-darken-1 px-1 py-1 rounded-sm" type="button">
-              <v-row no-gutters justify="center" align="center" class="flex-nowrap">
-                <v-col>
-                  <v-icon class="">mdi-fountain-pen</v-icon>
-                </v-col>
-              </v-row>
-            </button>
           </div>
         </v-col>
 
         <v-col cols="auto">
-          <div class="mx-1" @click="deleteDocument">
-            <button class="bg-red-lighten-5 text-red-darken-1 px-1 py-1 rounded-sm" type="button">
-              <v-row no-gutters justify="center" align="center" class="flex-nowrap">
-                <v-col>
-                  <v-icon class="">mdi-close-circle-outline</v-icon>
-                </v-col>
-              </v-row>
-            </button>
+          <div class="mx-1">
+            <ShgButton type="edit" icon-only @click="handleUpdateExpiredDate" />
+          </div>
+        </v-col>
+
+        <v-col cols="auto">
+          <div class="mx-1">
+            <ShgButton type="delete" icon-only @click="handleDeleteDocument" />
           </div>
         </v-col>
       </v-row>
     </div>
 
     <!-- when no file, trigger upload modal -->
-    <VeeField :name="name" v-model="model" :rules="validationRules" v-slot="{ errorMessage }">
-      <BaseButton color="primary" @click="handleFileUpload" v-if="!fileDetail?._id">
+    <VeeField :name="fieldName || label" v-model="model" :rules="validationRules" v-slot="{ errorMessage }">
+      <BaseButton color="primary" @click="handleFileUpload" v-if="!fileDetail?.id">
         <template v-slot:default>
           <v-row no-gutters justify="center" align="center" class="flex-nowrap">
             <v-col>
@@ -94,46 +82,32 @@
 </template>
 
 <script setup lang="ts">
+import { useFile } from '@/composables';
 import { shortenFilename } from '@/utils';
-import { BaseButton, useInput } from 'erp-template-vuetify-components';
-import { DefaultPropsData } from 'erp-template-vuetify-components-0.0.20/package/dist/constants';
+import { BaseButton, ShgButton, useInput, type UploadedFileData } from '@siloamhospitals/erp-template-vuetify-components';
 import moment from 'moment';
 import { onMounted, ref } from 'vue';
 import { openDialog } from 'vue3-promise-dialog';
 import ShgFileUploadWithExpiryUpdate from './PreQFileUploadWithExpiryUpdate.vue';
 import ShgFileUploadWithExpiryUpload from './PreQFileUploadWithExpiryUpload.vue';
 
-const componentName = 'ShgFileUpload';
+const componentName = 'ShgFileUploadWithExpiry';
 defineOptions({
   name: componentName,
 });
 
-// defineProps<{
-//   name: string;
-//   required: boolean;
-//   label: string;
-// }>();
-// {
-// //   name: string;
-// //   required: boolean;
-// //   label: string;
-// // }
-
 type Props = {
-  name: string;
+  fieldName?: string;
   required: boolean;
   label: string;
 };
 
-const props = withDefaults(defineProps<Props>(), {
-  ...DefaultPropsData,
-  maxFileSize: 2,
-});
+const props = defineProps<Props>();
 
 const { id, validationRules, columnSize } = useInput(componentName, props);
 
 const model = defineModel<string[]>();
-const fileDetail = ref<{ _id?: string; filename: string } | null>();
+const fileDetail = ref<UploadedFileData | null>();
 
 const handleFileUpload = async () => {
   type Response = {
@@ -151,20 +125,20 @@ const handleFileUpload = async () => {
   model.value = [data.date, data.id];
 
   fileDetail.value = {
-    filename: data.fileName,
-    _id: data.id,
+    file_name: data.fileName,
+    id: data.id,
   };
 };
 
 const handleUpdateExpiredDate = async () => {
-  type Response = {
+  type RetData = {
     date: string;
   };
 
   const data = (await openDialog(ShgFileUploadWithExpiryUpdate, {
-    fileId: fileDetail.value?._id,
+    fileId: `${fileDetail.value!.id}`,
     date: model.value![0],
-  })) as Response | undefined;
+  })) as RetData | undefined;
 
   if (!data) {
     return;
@@ -173,18 +147,12 @@ const handleUpdateExpiredDate = async () => {
   model.value![0] = data.date;
 };
 
-const deleteDocument = async () => {
-  const response = await DocumentService.deleteFile(fileDetail!.value!._id!);
+const { deleteFile, getFileData } = useFile();
 
-  if (response.error) {
-    console.log(response.error);
-    return;
-  }
+const handleDeleteDocument = async () => {
+  await deleteFile(fileDetail.value!.id);
 
-  fileDetail.value = {
-    filename: '',
-    _id: undefined,
-  };
+  fileDetail.value = null;
 
   model.value = [];
 };
@@ -194,19 +162,14 @@ const getDocument = async () => {
     return;
   }
 
-  const response = await DocumentService.getFile(model.value[1]);
-
-  if (response.error) {
-    console.log(response.error);
-    return;
-  }
+  const result = await getFileData(model.value[1]);
 
   fileDetail.value = {
-    filename: response.data.filename,
-    _id: response.data._id,
+    file_name: result.data!.filename,
+    id: result.data!.id,
   };
 
-  model.value = [response.data.expired_at, response.data._id];
+  model.value = [result.data!.expired_at!, result.data!.id];
 };
 
 onMounted(async () => {

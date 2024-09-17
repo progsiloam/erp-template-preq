@@ -1,7 +1,6 @@
 @use '@siloamhospitals/erp-template-vuetify-components/style';
 @use './styles/custom.scss';
 
-body {
-  width: 100% !important;
-  height: 100vh;
+html {
+  overflow-y: auto !important;
 }

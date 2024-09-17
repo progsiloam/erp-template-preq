@@ -14,10 +14,12 @@
 </template>
 
 <script setup lang="ts">
+import { usePreQFileUpload } from '@/composables';
 import ShgUseForm from '@/hooks';
-import { DocumentService } from '@/services/document.service';
-import { BaseButton, BaseDialog, ShgDatePicker, ShgForm } from 'erp-template-vuetify-components';
+import { BaseButton, BaseDialog, ShgDatePicker, ShgForm } from '@siloamhospitals/erp-template-vuetify-components';
 import { closeDialog } from 'vue3-promise-dialog';
+
+const { updateExpiredFile } = usePreQFileUpload();
 
 const props = defineProps<{
   fileId?: string;
@@ -35,12 +37,7 @@ const { form, handleSubmit, values } = ShgUseForm<FormDTO>({
 });
 
 const onSubmit = handleSubmit(async (value) => {
-  const response = await DocumentService.updateExpiredAt(props.fileId!, value.date);
-
-  if (response.error) {
-    console.log(response.error);
-    return;
-  }
+  await updateExpiredFile(props.fileId!, value.date);
 
   closeDialog({
     date: value.date,

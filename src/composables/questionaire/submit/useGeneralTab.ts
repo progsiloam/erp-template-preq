@@ -1,11 +1,4 @@
 import ShgUseForm from '@/hooks';
-import { useAuthStore } from '@/pinia/auth.store';
-import { defineStore } from 'pinia';
-
-type IFormSelectVendor = {
-  vendor_name: string;
-  selected_major: string[];
-};
 
 type IFormGeneral = {
   legal_address: string[];
@@ -36,23 +29,8 @@ type IFormGeneral = {
   location_verification: string[];
 };
 
-export const useCreateSubmissionStore = defineStore('useCreateSubmissionStore', () => {
-  const authStore = useAuthStore();
-  const {
-    form: formSelectVendor,
-    handleSubmit: handleSubmitSelectVendor,
-    values: valuesSelectVendor,
-  } = ShgUseForm<IFormSelectVendor>({
-    initialValues: {
-      selected_major: [],
-      vendor_name: authStore.activeUser,
-    },
-  });
-  const {
-    form: formGeneral,
-    handleSubmit: handleSubmitGeneral,
-    values: valuesGeneral,
-  } = ShgUseForm<IFormGeneral>({
+export const useGeneralTab = () => {
+  const { form, handleSubmit, values } = ShgUseForm<IFormGeneral>({
     initialValues: {
       legal_address: ['Java, Special Indonesia Jakarta'],
       operational_address: ['Tangerang, Banten, Indonesia Java'],
@@ -83,20 +61,21 @@ export const useCreateSubmissionStore = defineStore('useCreateSubmissionStore', 
     },
   });
 
-  const onSubmitSelectVendor = handleSubmitSelectVendor((value) => {
-    console.log(value);
-  });
+  const onSubmit = handleSubmit(
+    (value) => {
+      console.log('ok');
 
-  const onSubmitGeneral = handleSubmitGeneral((value) => {
-    console.log(value);
-  });
+      console.log(value);
+    },
+    (e) => {
+      console.log('error');
+      console.log(e);
+    },
+  );
 
   return {
-    formSelectVendor,
-    valuesSelectVendor,
-    formGeneral,
-    valuesGeneral,
-    onSubmitGeneral,
-    onSubmitSelectVendor,
+    form,
+    values,
+    onSubmit,
   };
-});
+};
