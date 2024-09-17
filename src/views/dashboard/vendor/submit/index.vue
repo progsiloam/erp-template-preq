@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ShgLayout, type LayoutNavigationItem } from 'erp-template-vuetify-components';
+import { ShgLayout, type LayoutNavigationItem } from '@siloamhospitals/erp-template-vuetify-components';
 import { onMounted, ref, toRaw } from 'vue';
 import { submission } from './data';
 import GeneralTab from './GeneralTab.vue';

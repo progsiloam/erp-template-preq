@@ -86,6 +86,30 @@ const submission: SubmissionAttributes = {
             {
               is_required: true,
               question_text: {
+                id: 'Unggah Dokumen IUP',
+                eng: 'Upload Document IUP',
+              },
+              input_type: 'File Upload',
+              options: [],
+              question_score: 10,
+              user_answer: [],
+              is_marked: false,
+            },
+            {
+              is_required: true,
+              question_text: {
+                id: 'Unggah Dokumen IUP Dengan Expired',
+                eng: 'Upload Document IUP With Expired',
+              },
+              input_type: 'File Upload (expiry)',
+              options: [],
+              question_score: 10,
+              user_answer: [],
+              is_marked: false,
+            },
+            {
+              is_required: true,
+              question_text: {
                 id: 'Apa jenis industri utama dari fasilitas manufaktur Anda?',
                 eng: 'What is the primary industry type of your manufacturing facility?',
               },

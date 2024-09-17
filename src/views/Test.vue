@@ -7,12 +7,7 @@
     >
     <ShgForm ref="form" :columns="1">
       <!-- <PreQFileUpload label="Upload" v-model="values.user_answer[0]" :required="true" /> -->
-      <PreQFileUploadWithExpiry
-        label="Documen IUP"
-        field-name="Documen IUP"
-        :required="false"
-        v-model="values.user_answer"
-      />
+      <PreQFileUploadWithExpiry label="Documen IUP" field-name="Documen IUP" :required="true" v-model="values.user_answer" />
     </ShgForm>
     <ShgButton type="save" @click="onSubmit">Submit</ShgButton>
   </div>
@@ -25,7 +20,7 @@ import { ShgButton, ShgForm } from '@siloamhospitals/erp-template-vuetify-compon
 
 const { form, handleSubmit, values } = ShgUseForm<{ user_answer: string[] }>({
   initialValues: {
-    user_answer: ['2024-09-06', '66e3edb6c427fb9ea699f1b2'],
+    user_answer: ['2024-09-02', '66e8f0ad909acf50f570f35c'],
   },
 });
 

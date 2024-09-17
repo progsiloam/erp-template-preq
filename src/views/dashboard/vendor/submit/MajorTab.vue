@@ -49,11 +49,23 @@
             :required="question.is_required"
             v-if="question.input_type === 'Dropdown'"
           />
+          <PreQFileUploadWithExpiry
+            v-model="values.sections[Sindex].questions[Qindex].user_answer"
+            :required="question.is_required"
+            :label="question.question_text[langStore.activeLang]"
+            :field-name="`${question.question_text}+${Qindex}`"
+            v-if="question.input_type === 'File Upload (expiry)'"
+          />
+          <PreQFileUpload
+            v-model="values.sections[Sindex].questions[Qindex].user_answer[0]"
+            :required="question.is_required"
+            :label="question.question_text[langStore.activeLang]"
+            :field-name="`${question.question_text}+${Qindex}`"
+            v-if="question.input_type === 'File Upload'"
+          />
         </template>
       </template>
     </ShgForm>
-
-    <template> tester </template>
 
     <template v-slot:actions>
       <ShgButton type="submit" @click="onSubmit"></ShgButton>
@@ -62,6 +74,8 @@
 </template>
 
 <script lang="ts" setup>
+import PreQFileUpload from '@/components/PreQFileUpload.vue';
+import PreQFileUploadWithExpiry from '@/components/PreQFileUploadWithExpiry.vue';
 import ShgUseForm from '@/hooks';
 import { useLangStore } from '@/pinia/lang.store';
 import {
@@ -72,7 +86,7 @@ import {
   ShgDatePicker,
   ShgForm,
   ShgTextField,
-} from 'erp-template-vuetify-components';
+} from '@siloamhospitals/erp-template-vuetify-components';
 import { onMounted, onUnmounted } from 'vue';
 import type { SubmissionAttributes } from './IData';
 

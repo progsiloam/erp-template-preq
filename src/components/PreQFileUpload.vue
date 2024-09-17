@@ -15,6 +15,11 @@ import { useFile } from '@/composables';
 import { ShgFileUpload, type UploadedFileData } from '@siloamhospitals/erp-template-vuetify-components';
 import { onMounted, ref, watch } from 'vue';
 
+const componentName = 'ShgFileUpload';
+defineOptions({
+  name: componentName,
+});
+
 const uploadData = ref<File | UploadedFileData | null>(null);
 
 defineProps<{ label: string; fieldName?: string; required: boolean }>();

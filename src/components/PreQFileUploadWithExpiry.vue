@@ -1,6 +1,6 @@
 <template>
-  <v-col :id="componentName" cols="12" :md="columnSize">
-    <v-label v-if="label">
+  <v-col :id="id" cols="12" :md="columnSize">
+    <v-label v-if="label" class="mb-1">
       {{ label }}
     </v-label>
     <br />
@@ -27,7 +27,7 @@
         </v-col>
 
         <v-col cols="auto">
-          <button class="bg-blue-lighten-5 text-blue-darken-1 px-1 py-1 rounded-sm" type="button">
+          <div class="bg-blue-lighten-5 text-blue-darken-1 px-1 py-1 rounded-sm">
             <v-row no-gutters justify="center" align="center" class="flex-nowrap">
               <v-col>
                 <div class="mx-1">
@@ -40,37 +40,25 @@
                 </div>
               </v-col>
             </v-row>
-          </button>
-        </v-col>
-
-        <v-col cols="auto">
-          <div class="mx-1" @click="handleUpdateExpiredDate">
-            <button class="text-blue-darken-1 px-1 py-1 rounded-sm" type="button">
-              <v-row no-gutters justify="center" align="center" class="flex-nowrap">
-                <v-col>
-                  <v-icon class="">mdi-fountain-pen</v-icon>
-                </v-col>
-              </v-row>
-            </button>
           </div>
         </v-col>
 
         <v-col cols="auto">
-          <div class="mx-1" @click="deleteDocument">
-            <button class="bg-red-lighten-5 text-red-darken-1 px-1 py-1 rounded-sm" type="button">
-              <v-row no-gutters justify="center" align="center" class="flex-nowrap">
-                <v-col>
-                  <v-icon class="">mdi-close-circle-outline</v-icon>
-                </v-col>
-              </v-row>
-            </button>
+          <div class="mx-1">
+            <ShgButton type="edit" icon-only @click="handleUpdateExpiredDate" />
+          </div>
+        </v-col>
+
+        <v-col cols="auto">
+          <div class="mx-1">
+            <ShgButton type="delete" icon-only @click="handleDeleteDocument" />
           </div>
         </v-col>
       </v-row>
     </div>
 
     <!-- when no file, trigger upload modal -->
-    <VeeField :name="fieldName" v-model="model" :rules="validationRules" v-slot="{ errorMessage }">
+    <VeeField :name="fieldName || label" v-model="model" :rules="validationRules" v-slot="{ errorMessage }">
       <BaseButton color="primary" @click="handleFileUpload" v-if="!fileDetail?.id">
         <template v-slot:default>
           <v-row no-gutters justify="center" align="center" class="flex-nowrap">
@@ -96,20 +84,20 @@
 <script setup lang="ts">
 import { useFile } from '@/composables';
 import { shortenFilename } from '@/utils';
-import { BaseButton, useInput, type UploadedFileData } from '@siloamhospitals/erp-template-vuetify-components';
+import { BaseButton, ShgButton, useInput, type UploadedFileData } from '@siloamhospitals/erp-template-vuetify-components';
 import moment from 'moment';
 import { onMounted, ref } from 'vue';
 import { openDialog } from 'vue3-promise-dialog';
 import ShgFileUploadWithExpiryUpdate from './PreQFileUploadWithExpiryUpdate.vue';
 import ShgFileUploadWithExpiryUpload from './PreQFileUploadWithExpiryUpload.vue';
 
-const componentName = 'ShgFileUpload';
+const componentName = 'ShgFileUploadWithExpiry';
 defineOptions({
   name: componentName,
 });
 
 type Props = {
-  fieldName: string;
+  fieldName?: string;
   required: boolean;
   label: string;
 };
@@ -161,7 +149,7 @@ const handleUpdateExpiredDate = async () => {
 
 const { deleteFile, getFileData } = useFile();
 
-const deleteDocument = async () => {
+const handleDeleteDocument = async () => {
   await deleteFile(fileDetail.value!.id);
 
   fileDetail.value = null;
