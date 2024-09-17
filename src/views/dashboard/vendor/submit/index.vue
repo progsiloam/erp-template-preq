@@ -1,9 +1,26 @@
 <template>
-  <!-- <p>layout</p>
-  <pre>
-		{{ draft?.questionnaires[0] }}
-	</pre
-  > -->
+  <div class="mb-3">
+    <v-row justify="space-between" align="center">
+      <v-col cols="6">
+        <h2>Create Pre-Q Document</h2>
+      </v-col>
+      <v-col cols="6">
+        <div class="d-flex justify-end">
+          <div class="d-flex ga-2 me-3">
+            <ShgButton type="reject" />
+            <ShgButton type="revise" />
+            <ShgButton type="approve" />
+          </div>
+          <v-divider vertical class="me-4"></v-divider>
+          <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
+            <v-btn value="eng">eng</v-btn>
+            <v-btn value="id">id</v-btn>
+          </v-btn-toggle>
+          <BaseButtonIcon icon="mdi-alpha-x" color="secondary" class="ms-3" @click="() => console.log('back')" />
+        </div>
+      </v-col>
+    </v-row>
+  </div>
   <ShgLayout :navigation-items="navigationItems">
     <template v-slot:contents="{ activeItemValue }">
       <div v-if="'Select Vendor' === activeItemValue">
@@ -24,7 +41,8 @@
 </template>
 
 <script setup lang="ts">
-import { ShgLayout, type LayoutNavigationItem } from '@siloamhospitals/erp-template-vuetify-components';
+import { useLangStore } from '@/pinia/lang.store';
+import { BaseButtonIcon, ShgLayout, type LayoutNavigationItem } from '@siloamhospitals/erp-template-vuetify-components';
 import { onMounted, ref, toRaw } from 'vue';
 import { submission } from './data';
 import GeneralTab from './GeneralTab.vue';
@@ -38,6 +56,8 @@ const navigationItems = ref<LayoutNavigationItem[]>([
 ]);
 
 const draft = ref<SubmissionAttributes | null>();
+
+const langStore = useLangStore();
 
 onMounted(async () => {
   const data = submission;
