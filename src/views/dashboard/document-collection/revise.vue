@@ -1,28 +1,26 @@
 <template>
   <!-- note tunggu compponent james -->
-  <div class="mb-3 mt-n3">
-    <v-container fluid>
-      <v-row justify="space-between" align="center">
-        <v-col cols="6">
-          <h2>Document Collection</h2>
-        </v-col>
-        <v-col cols="6">
-          <div class="d-flex justify-end">
-            <div class="d-flex ga-2 me-3">
-              <BaseButton color="secondary">Reset</BaseButton>
-              <ShgButton type="cancel" />
-              <ShgButton type="revise" />
-            </div>
-            <v-divider vertical class="me-4"></v-divider>
-            <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
-              <v-btn value="eng">eng</v-btn>
-              <v-btn value="id">id</v-btn>
-            </v-btn-toggle>
-            <BaseButtonIcon icon="mdi-alpha-x" color="secondary" class="ms-3" @click="toBackCollectionView" />
+  <div class="mb-3">
+    <v-row justify="space-between" align="center">
+      <v-col cols="6">
+        <h2>Document Collection</h2>
+      </v-col>
+      <v-col cols="6">
+        <div class="d-flex justify-end">
+          <div class="d-flex ga-2 me-3">
+            <BaseButton color="secondary">Reset</BaseButton>
+            <ShgButton type="cancel" />
+            <ShgButton type="revise" />
           </div>
-        </v-col>
-      </v-row>
-    </v-container>
+          <v-divider vertical class="me-4"></v-divider>
+          <v-btn-toggle v-model="langStore.activeLang" variant="outlined" divided density="compact">
+            <v-btn value="eng">eng</v-btn>
+            <v-btn value="id">id</v-btn>
+          </v-btn-toggle>
+          <BaseButtonIcon icon="mdi-alpha-x" color="secondary" class="ms-3" @click="toBackCollectionView" />
+        </div>
+      </v-col>
+    </v-row>
   </div>
   <ShgLayout :navigation-items="navigationItems">
     <template v-slot:contents="{ activeItemValue }">
