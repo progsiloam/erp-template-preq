@@ -58,6 +58,13 @@ const navigationMenuItems = ref<NavigationMenu[]>([
   { name: 'Dashboard', path: '/', icon: 'mdi-view-dashboard-outline' },
   { name: 'About', path: '/about', icon: 'mdi-information' },
   {
+    name: 'Config',
+    children: [
+      { name: 'pre-q-score', path: '/pre-q-score', icon: 'mdi-list-box-outline' },
+      { name: 'pre-q-validity', path: '/pre-q-validity', icon: 'mdi-list-box-outline' },
+    ],
+  },
+  {
     name: 'Master',
     children: [
       { name: 'Question', path: '/question', icon: 'mdi-list-box-outline' },

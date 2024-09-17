@@ -104,11 +104,6 @@ const router = createRouter({
           component: Test,
         },
         {
-          path: '/test',
-          name: 'Example Form PreQ',
-          component: Test,
-        },
-        {
           path: '/document-pre-scoring-vm',
           name: 'documentPreScoringVM',
           children: [
@@ -159,6 +154,16 @@ const router = createRouter({
         {
           path: '/preq-release',
           name: 'preQRelease',
+          component: () => import('@/views/dashboard/preq-release/index.vue'),
+        },
+        {
+          path: '/pre-q-score',
+          name: 'preQScore',
+          component: () => import('@/views/dashboard/preq-release/index.vue'),
+        },
+        {
+          path: '/pre-q-validity',
+          name: 'preQValidity',
           component: () => import('@/views/dashboard/preq-release/index.vue'),
         },
       ],
