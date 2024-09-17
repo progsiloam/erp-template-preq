@@ -156,6 +156,11 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: '/preq-release',
+          name: 'preQRelease',
+          component: () => import('@/views/dashboard/preq-release/index.vue'),
+        },
       ],
     },
   ],

@@ -89,7 +89,7 @@ const navigationMenuItems = ref<NavigationMenu[]>([
       { name: 'HM Scoring view', path: '/document-pre-scoring-hm', icon: 'mdi-file-document-outline' },
     ],
   },
-  { name: 'External Links' },
+  { name: 'Pre-Q Release', path: 'preq-release', icon: 'mdi-file-document-outline' },
   { name: 'Google', path: 'https://www.google.com', icon: 'mdi-google', asHref: true },
 ]);
 </script>
