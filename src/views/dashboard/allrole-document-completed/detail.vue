@@ -26,6 +26,7 @@
   </div>
   <ShgLayout :navigation-items="navigationItems">
     <template v-slot:contents="{ activeItemValue }">
+      <pre></pre>
       <ShgCard title="Document Collection">
         <v-expansion-panels multiple>
           <v-expansion-panel id="general" title="General" class="mb-5">

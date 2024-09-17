@@ -79,6 +79,7 @@ const navigationMenuItems = ref<NavigationMenu[]>([
       { name: 'Approve', path: '/document-collection/approve', icon: 'mdi-file-document-outline' },
       { name: 'Revise', path: '/document-collection/revise', icon: 'mdi-file-document-outline' },
       { name: 'Reject', path: '/document-collection/reject', icon: 'mdi-file-document-outline' },
+      { name: 'Test', path: '/document-collection/test', icon: 'mdi-file-document-outline' },
     ],
   },
   {
@@ -89,6 +90,7 @@ const navigationMenuItems = ref<NavigationMenu[]>([
       { name: 'HM Scoring view', path: '/document-pre-scoring-hm', icon: 'mdi-file-document-outline' },
     ],
   },
+  { name: 'Document Completed', path: '/document-completed', icon: 'mdi-file-document-outline' },
   { name: 'Pre-Q Release', path: 'preq-release', icon: 'mdi-file-document-outline' },
   { name: 'Google', path: 'https://www.google.com', icon: 'mdi-google', asHref: true },
 ]);

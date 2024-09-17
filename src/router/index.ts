@@ -96,12 +96,12 @@ const router = createRouter({
               name: 'rejectDocumentCollection',
               component: () => import('@/views/dashboard/document-collection/reject.vue'),
             },
+            {
+              path: 'test',
+              name: 'test',
+              component: () => import('@/views/dashboard/document-collection/test.vue'),
+            },
           ],
-        },
-        {
-          path: '/test',
-          name: 'Example Form PreQ',
-          component: Test,
         },
         {
           path: '/test',
@@ -153,6 +153,22 @@ const router = createRouter({
               path: '{doc_id}',
               name: 'documentPreScoringHMDetail',
               component: () => import('@/views/dashboard/document-pre-scoring/HM/Hmscoring.vue'),
+            },
+          ],
+        },
+        {
+          path: '/document-completed',
+          name: 'documentCompleted',
+          children: [
+            {
+              path: '',
+              name: 'documentCompletedOverview',
+              component: () => import('@/views/dashboard/allrole-document-completed/index.vue'),
+            },
+            {
+              path: '{doc_id}',
+              name: 'documentCompletedHMDetail',
+              component: () => import('@/views/dashboard/allrole-document-completed/detail.vue'),
             },
           ],
         },
