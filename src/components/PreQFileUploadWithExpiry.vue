@@ -6,7 +6,7 @@
     <br />
 
     <!-- when file exist, show this detail -->
-    <div class="bg-grey-lighten-5 rounded-sm py-1" style="width: fit-content" v-if="fileDetail?.id">
+    <div class="bg-grey-lighten-5 rounded py-1 px-2" style="width: fit-content" v-if="fileDetail?.id">
       <v-row no-gutters justify="center" align="center">
         <v-col cols="auto">
           <v-row no-gutters justify="center" align="center" class="flex-nowrap">

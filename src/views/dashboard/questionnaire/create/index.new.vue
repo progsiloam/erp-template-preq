@@ -1,7 +1,7 @@
 <template>
   <ShgForm :columns="1" ref="form">
     <v-container>
-      <v-row align="start" justify="end" no-gutters>
+      <v-row align="end" justify="end" no-gutters>
         <v-col cols="6">
           <ShgAutocomplete
             v-model="values.major_of_bussiness"
@@ -12,7 +12,7 @@
           />
         </v-col>
         <v-col cols="auto">
-          <div class="pa-3" style="margin-top: 19.95px">
+          <div class="py-3">
             <BaseButton color="primary" @click="useNewQuestionnaire.addSections" :disabled="values.major_of_bussiness === ''"
               >Add section</BaseButton
             >
@@ -26,7 +26,7 @@
           <div v-for="(section, sIndex) in values.sections" :key="sIndex">
             <ShgCard title="Create Questionaire">
               <v-container>
-                <v-row align="start" justify="end" no-gutters>
+                <v-row align="end" justify="end" no-gutters>
                   <v-col cols="6">
                     <ShgTextField
                       v-model="values.sections[sIndex].name"
@@ -36,7 +36,7 @@
                     />
                   </v-col>
                   <v-col cols="auto">
-                    <div class="pa-3" style="margin-top: 19.95px">
+                    <div class="py-3" style="margin-top: 19.95px">
                       <BaseButton @click="handleAddQuestions(`sections[${sIndex}].questions`)" color="primary"
                         >Add Question
                       </BaseButton>
@@ -50,7 +50,7 @@
                         <BaseButton
                           color="danger"
                           @click="useNewQuestionnaire.deleteKeyQuestion({ sections: sIndex, question: qIndex })"
-                          >Remove Question - {{ qIndex + 1 }}</BaseButton
+                          >Remove Question</BaseButton
                         >
                       </div>
 
@@ -58,7 +58,7 @@
                         <v-col>
                           <ShgTextField
                             v-model="values.sections[sIndex].questions[qIndex].question_text.eng"
-                            :label="`Question (ENG) ${qIndex + 1}`"
+                            :label="`Question (ENG)`"
                             :field-name="`question-eng-${qIndex}`"
                             :required="true"
                           />
@@ -66,7 +66,7 @@
                         <v-col>
                           <ShgTextField
                             v-model="values.sections[sIndex].questions[qIndex].question_text.id"
-                            :label="`Question (ID) ${qIndex + 1}`"
+                            :label="`Question (ID)`"
                             :field-name="`question-id-${qIndex}`"
                             :required="true"
                           />
@@ -74,7 +74,7 @@
                         <v-col>
                           <ShgNumeric
                             v-model="values.sections[sIndex].questions[qIndex].question_score"
-                            :label="`Question Score ${qIndex + 1}`"
+                            :label="`Question Score`"
                             :field-name="`question-score-${qIndex}`"
                             :required="true"
                           />
@@ -133,9 +133,7 @@
                 </v-row>
               </v-container>
               <template v-slot:actions>
-                <BaseButton color="danger" @click="useNewQuestionnaire.deleteKeySection(sIndex)"
-                  >Remove Questionaire</BaseButton
-                >
+                <BaseButton color="danger" @click="useNewQuestionnaire.deleteKeySection(sIndex)">Remove Section</BaseButton>
               </template>
             </ShgCard>
           </div>
