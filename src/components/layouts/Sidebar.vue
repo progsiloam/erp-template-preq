@@ -60,8 +60,8 @@ const navigationMenuItems = ref<NavigationMenu[]>([
   {
     name: 'Config',
     children: [
-      { name: 'pre-q-score', path: '/pre-q-score', icon: 'mdi-list-box-outline' },
-      { name: 'pre-q-validity', path: '/pre-q-validity', icon: 'mdi-list-box-outline' },
+      { name: 'PreQ Score', path: '/pre-q-score', icon: 'mdi-list-box-outline' },
+      { name: 'PreQ Validity', path: '/pre-q-validity', icon: 'mdi-list-box-outline' },
     ],
   },
   {

@@ -164,7 +164,7 @@ const router = createRouter({
         {
           path: '/pre-q-validity',
           name: 'preQValidity',
-          component: () => import('@/views/dashboard/preq-release/index.vue'),
+          component: () => import('@/views/dashboard/config/pre-q-validity/index.vue'),
         },
       ],
     },
