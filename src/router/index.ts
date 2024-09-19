@@ -73,6 +73,33 @@ const router = createRouter({
           component: ExampleFormPreQ,
         },
         {
+          path: '/vendor',
+          name: 'vendor',
+          children: [
+            {
+              path: '',
+              name: 'vendorOverview',
+              component: () => import('@/views/dashboard/master-data-vendor/index.vue'),
+            },
+            {
+              path: 'pre-q-detail/:vendor_name',
+              name: 'vendorPreQDetail',
+              children: [
+                {
+                  path: '',
+                  name: 'vendorPreQDetailOverview',
+                  component: () => import('@/views/dashboard/master-data-vendor/PreQDetail.vue'),
+                },
+                {
+                  path: 'view/:vendor_name',
+                  name: 'vendorPreQDetailPreQView',
+                  component: () => import('@/views/dashboard/document-view/index.vue'),
+                },
+              ],
+            },
+          ],
+        },
+        {
           path: '/document-collection',
           name: 'documentCollection',
           children: [
@@ -113,7 +140,7 @@ const router = createRouter({
               component: () => import('@/views/dashboard/document-pre-scoring/VM/index.vue'),
             },
             {
-              path: '{doc_id}',
+              path: ':doc_id',
               name: 'documentPreScoringVMDetail',
               component: () => import('@/views/dashboard/document-pre-scoring/VM/Vmscoring.vue'),
             },
@@ -129,7 +156,7 @@ const router = createRouter({
               component: () => import('@/views/dashboard/document-pre-scoring/SME/index.vue'),
             },
             {
-              path: '{doc_id}',
+              path: ':doc_id',
               name: 'documentPreScoringSMEDetail',
               component: () => import('@/views/dashboard/document-pre-scoring/SME/Smescoring.vue'),
             },
@@ -145,7 +172,7 @@ const router = createRouter({
               component: () => import('@/views/dashboard/document-pre-scoring/HM/index.vue'),
             },
             {
-              path: '{doc_id}',
+              path: ':doc_id',
               name: 'documentPreScoringHMDetail',
               component: () => import('@/views/dashboard/document-pre-scoring/HM/Hmscoring.vue'),
             },

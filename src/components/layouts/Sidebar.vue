@@ -69,6 +69,7 @@ const navigationMenuItems = ref<NavigationMenu[]>([
     children: [
       { name: 'Question', path: '/question', icon: 'mdi-list-box-outline' },
       { name: 'Questionaire', path: '/questionaire', icon: 'mdi-list-box-outline' },
+      { name: 'Vendor', path: '/vendor', icon: 'mdi-list-box-outline' },
     ],
   },
   {
