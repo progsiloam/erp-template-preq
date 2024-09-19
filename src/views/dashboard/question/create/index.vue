@@ -2,16 +2,16 @@
   <ShgCard title="Create Question">
     <ShgForm :columns="1" ref="form">
       <v-container>
-        <v-row class="d-flex align-center" no-gutters>
-          <v-col cols="6">
-            <ShgTextField v-model="values.question_text.id" label="Question (ID)" :required="true" />
+        <v-row>
+          <v-col cols="12" sm="6">
+            <ShgTextField v-model="values.question_text.id" label="Question (ID)" :required="true" class="pa-0" />
           </v-col>
-          <v-col cols="6">
-            <ShgTextField v-model="values.question_text.eng" label="Question (ENG)" :required="true" />
+          <v-col cols="12" sm="6">
+            <ShgTextField v-model="values.question_text.eng" label="Question (ENG)" :required="true" class="pa-0" />
           </v-col>
         </v-row>
-        <v-row class="d-flex align-center" no-gutters>
-          <v-col>
+        <v-row align="end">
+          <v-col cols="12" :sm="createQuestion.shouldRenderAddOptions() ? '10' : '12'">
             <ShgAutocomplete
               v-model="values.input_type"
               label="Select an Option of Input Type"
@@ -22,55 +22,58 @@
                   value: type,
                 }))
               "
+              class="pa-0"
             />
           </v-col>
-          <v-col v-if="createQuestion.shouldRenderAddOptions()" cols="auto">
-            <div class="pa-3" style="margin-top: 19.95px">
-              <v-btn
-                variant="tonal"
-                rounded="2"
-                size="small"
-                class="bg-orange-darken-3"
-                @click="createQuestion.addOptions()"
-                style="height: 32px"
-                >+ Option</v-btn
-              >
-            </div>
+          <v-col
+            v-if="createQuestion.shouldRenderAddOptions()"
+            cols="12"
+            :sm="createQuestion.shouldRenderAddOptions() ? '2' : '0'"
+          >
+            <v-btn
+              variant="tonal"
+              rounded="2"
+              size="small"
+              class="bg-orange-darken-3 w-100"
+              @click="createQuestion.addOptions()"
+              style="height: 36px"
+              >+ Option</v-btn
+            >
           </v-col>
         </v-row>
         <div class="mb-6 mb-md-3" v-for="(option, oIndex) in createQuestion.values.options" :key="oIndex">
-          <v-row align="start" no-gutters>
-            <v-col>
-              <v-row no-gutters>
-                <v-col cols="12" md="6">
+          <v-row align="end">
+            <v-col cols="12" sm="10">
+              <v-row>
+                <v-col cols="12">
                   <ShgTextField
                     v-model="values.options[oIndex].option_text.id"
                     :label="`Option Text (ID) - ${oIndex + 1}`"
                     :required="true"
+                    class="pa-0"
                   />
                 </v-col>
-                <v-col cols="12" md="6">
+                <v-col cols="12">
                   <ShgTextField
                     v-model="values.options[oIndex].option_text.eng"
                     :label="`Option Text (ENG) - ${oIndex + 1}`"
                     :required="true"
+                    class="pa-0"
                   />
                 </v-col>
               </v-row>
             </v-col>
 
-            <v-col cols="auto">
-              <div class="pa-3" style="margin-top: 19.95px">
-                <v-btn
-                  style="height: 32px"
-                  variant="tonal"
-                  rounded="2"
-                  size="small"
-                  class="bg-error"
-                  @click="createQuestion.deleteKey(oIndex)"
-                  >Delete</v-btn
-                >
-              </div>
+            <v-col cols="12" sm="2">
+              <v-btn
+                style="height: 36px"
+                variant="tonal"
+                rounded="2"
+                size="small"
+                class="bg-error w-100"
+                @click="createQuestion.deleteKey(oIndex)"
+                >Delete</v-btn
+              >
             </v-col>
           </v-row>
         </div>
