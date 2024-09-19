@@ -73,6 +73,38 @@ const router = createRouter({
           component: ExampleFormPreQ,
         },
         {
+          path: '/vendor',
+          name: 'vendor',
+          children: [
+            {
+              path: '',
+              name: 'vendorOverview',
+              component: () => import('@/views/dashboard/master-data-vendor/index.vue'),
+            },
+            {
+              path: 'pre-q-detail/:vendor_name',
+              name: 'vendorPreQDetail',
+              children: [
+                {
+                  path: '',
+                  name: 'vendorPreQDetailOverview',
+                  component: () => import('@/views/dashboard/master-data-vendor/PreQDetail.vue'),
+                },
+                {
+                  path: 'view/:vendor_name',
+                  name: 'vendorPreQDetailPreQView',
+                  component: () => import('@/views/dashboard/document-view/index.vue'),
+                },
+              ],
+            },
+          ],
+        },
+        {
+          path: '/major-of-business',
+          name: 'majorOfBusiness',
+          component: () => import('@/views/dashboard/master-data-major/index.vue'),
+        },
+        {
           path: '/document-collection',
           name: 'documentCollection',
           children: [
