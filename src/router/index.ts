@@ -100,6 +100,11 @@ const router = createRouter({
           ],
         },
         {
+          path: '/major-of-business',
+          name: 'majorOfBusiness',
+          component: () => import('@/views/dashboard/master-data-major/index.vue'),
+        },
+        {
           path: '/document-collection',
           name: 'documentCollection',
           children: [
