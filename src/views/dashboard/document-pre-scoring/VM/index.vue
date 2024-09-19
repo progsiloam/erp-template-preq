@@ -1,27 +1,35 @@
 <template>
   <h2 class="mb-3">Pre-Qualification List</h2>
-  <v-container fluid>
-    <v-row justify="start">
-      <v-col cols="5">
-        <div class="d-flex align-center">
-          <ShgDatePicker v-model="datePeriod" label="Date Period From" />
-          <ShgDatePicker v-model="datePeriod" label="Date Period To" />
-          <div class="mt-6 d-flex ga-3">
-            <ShgButton type="delete" />
-            <BaseButton color="secondary">History</BaseButton>
-          </div>
-        </div>
-      </v-col>
-    </v-row>
-    <v-row justify="space-between" align="center">
-      <v-col cols="3">
-        <ShgAutocomplete v-model="selectedItem" :items="itemsSelect" label="Pick Date" />
-      </v-col>
-      <v-col cols="3">
-        <ShgTextField label="" placeholder="Click to Search" field-name="search" v-model="search" />
-      </v-col>
-    </v-row>
-  </v-container>
+
+  <v-row align="end">
+    <v-col cols="auto">
+      <ShgDatePicker v-model="datePeriod" label="Date Period From" class="pa-0" style="width: 200px" />
+    </v-col>
+
+    <v-col cols="auto">
+      <ShgDatePicker v-model="datePeriod" label="Date Period To" class="pa-0" style="width: 200px" />
+    </v-col>
+
+    <v-col cols="auto" style="margin-left: auto">
+      <v-row no-gutters>
+        <v-col>
+          <ShgButton type="delete" class="mr-3" />
+        </v-col>
+        <v-col>
+          <BaseButton color="secondary">History</BaseButton>
+        </v-col>
+      </v-row>
+    </v-col>
+  </v-row>
+
+  <v-row justify="space-between" align="center">
+    <v-col cols="3">
+      <ShgAutocomplete v-model="selectedItem" :items="itemsSelect" label="Pick Date" class="pa-0 mb-3" />
+    </v-col>
+    <v-col cols="3">
+      <ShgTextField label="" placeholder="Click to Search" field-name="search" v-model="search" class="pa-0 mb-3" />
+    </v-col>
+  </v-row>
   <ShgTable :columns="columns" :items="items">
     <template v-slot:status="{ item }">
       <span :class="`bg-${colorBadge(item.status)} pa-1 rounded`">{{ item.status }}</span>

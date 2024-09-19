@@ -1,24 +1,22 @@
 <template>
   <h2 class="mb-3">Pre-Qualification List</h2>
-  <v-container fluid>
-    <v-row justify="start">
-      <v-col cols="12">
-        <div class="text-center bg-secondary pa-2">
-          <p class="text-grey-darken-2">
-            Time remaining for the current time period <span class="font-weight-bold">240 Days</span>
-          </p>
-        </div>
-      </v-col>
-    </v-row>
-    <v-row justify="space-between" align="center">
-      <v-col cols="3">
-        <ShgAutocomplete v-model="selectedItem" :items="itemsSelect" label="Pick Date" />
-      </v-col>
-      <v-col cols="3">
-        <ShgTextField label="" placeholder="Click to Search" field-name="search" v-model="search" />
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-row justify="start">
+    <v-col cols="12">
+      <div class="text-center bg-secondary pa-2">
+        <p class="text-grey-darken-2">
+          Time remaining for the current time period <span class="font-weight-bold">240 Days</span>
+        </p>
+      </div>
+    </v-col>
+  </v-row>
+  <v-row justify="space-between" align="center" no-gutters>
+    <v-col cols="3">
+      <ShgAutocomplete v-model="selectedItem" :items="itemsSelect" label="Pick Date" class="px-0" />
+    </v-col>
+    <v-col cols="3">
+      <ShgTextField label="" placeholder="Click to Search" field-name="search" v-model="search" class="px-0" />
+    </v-col>
+  </v-row>
   <ShgTable :columns="columns" :items="items">
     <template v-slot:status="{ item }">
       <span :class="`bg-${colorBadge(item.status)} pa-1 rounded`">{{ item.status }}</span>
