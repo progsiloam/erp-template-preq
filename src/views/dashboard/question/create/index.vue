@@ -30,15 +30,9 @@
             cols="12"
             :sm="createQuestion.shouldRenderAddOptions() ? '2' : '0'"
           >
-            <v-btn
-              variant="tonal"
-              rounded="2"
-              size="small"
-              class="bg-orange-darken-3 w-100"
-              @click="createQuestion.addOptions()"
-              style="height: 36px"
-              >+ Option</v-btn
-            >
+            <BaseButton color="warning" rounded="2" class="bg-orange-darken-3 w-100" @click="createQuestion.addOptions()">
+              + Option
+            </BaseButton>
           </v-col>
         </v-row>
         <div class="mb-6 mb-md-3" v-for="(option, oIndex) in createQuestion.values.options" :key="oIndex">
@@ -65,15 +59,7 @@
             </v-col>
 
             <v-col cols="12" sm="2">
-              <v-btn
-                style="height: 36px"
-                variant="tonal"
-                rounded="2"
-                size="small"
-                class="bg-error w-100"
-                @click="createQuestion.deleteKey(oIndex)"
-                >Delete</v-btn
-              >
+              <ShgButton type="delete" rounded="2" class="bg-error w-100" @click="createQuestion.deleteKey(oIndex)" />
             </v-col>
           </v-row>
         </div>
