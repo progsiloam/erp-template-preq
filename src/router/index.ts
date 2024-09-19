@@ -105,6 +105,22 @@ const router = createRouter({
           component: () => import('@/views/dashboard/master-data-major/index.vue'),
         },
         {
+          path: '/report',
+          name: 'report',
+          children: [
+            {
+              path: '',
+              name: 'reportOverview',
+              component: () => import('@/views/dashboard/report/index.vue'),
+            },
+            {
+              path: 'report-action-history/:id',
+              name: 'reportActionHistory',
+              component: () => import('@/views/dashboard/report/action-history.vue'),
+            },
+          ],
+        },
+        {
           path: '/document-collection',
           name: 'documentCollection',
           children: [
