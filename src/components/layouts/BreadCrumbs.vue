@@ -1,5 +1,5 @@
 <template>
-  <v-breadcrumbs :items="breadCrumbItems" class="mt-n4"></v-breadcrumbs>
+  <v-breadcrumbs :items="breadCrumbItems" class="mb-5 pa-0"></v-breadcrumbs>
 </template>
 
 <script setup lang="ts">

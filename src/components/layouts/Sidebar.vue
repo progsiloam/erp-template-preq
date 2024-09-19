@@ -57,6 +57,7 @@ const navigationMenuItems = ref<NavigationMenu[]>([
   { name: 'DASHBOARD' },
   { name: 'Dashboard', path: '/', icon: 'mdi-view-dashboard-outline' },
   { name: 'About', path: '/about', icon: 'mdi-information' },
+  { name: 'Report', path: '/report', icon: 'mdi-file-document-outline' },
   {
     name: 'Config',
     children: [
@@ -98,7 +99,7 @@ const navigationMenuItems = ref<NavigationMenu[]>([
       { name: 'HM Scoring view', path: '/document-pre-scoring-hm', icon: 'mdi-file-document-outline' },
     ],
   },
-  { name: 'Pre-Q Release', path: 'preq-release', icon: 'mdi-file-document-outline' },
+  { name: 'Pre-Q Release', path: '/preq-release', icon: 'mdi-file-document-outline' },
   { name: 'Google', path: 'https://www.google.com', icon: 'mdi-google', asHref: true },
 ]);
 </script>
