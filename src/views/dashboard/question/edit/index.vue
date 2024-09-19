@@ -2,63 +2,59 @@
   <ShgCard title="Edit Question">
     <ShgForm :columns="1" ref="form">
       <v-container>
-        <v-row class="d-flex align-center" no-gutters>
-          <v-col cols="6">
-            <ShgTextField v-model="values.question_text.id" label="Question (ID)" :required="true" />
+        <v-row>
+          <v-col cols="12" sm="6">
+            <ShgTextField v-model="values.question_text.id" label="Question (ID)" :required="true" class="pa-0" />
           </v-col>
-          <v-col cols="6">
-            <ShgTextField v-model="values.question_text.eng" label="Question (ENG)" :required="true" />
+          <v-col cols="12" sm="6">
+            <ShgTextField v-model="values.question_text.eng" label="Question (ENG)" :required="true" class="pa-0" />
           </v-col>
         </v-row>
-        <v-row class="d-flex align-center" no-gutters>
-          <v-col>
-            <div class="mx-2">
-              <ShgAutocomplete
-                v-model="values.input_type"
-                label="Select an Option of Input Type"
-                textPlaceholder="Please select"
-                :items="[...inputType].map((type) => ({ label: type, value: type }))"
-              />
-            </div>
+        <v-row align="end">
+          <v-col cols="12" :sm="editQuestion.shouldRenderAddOptions() ? '10' : '12'">
+            <ShgAutocomplete
+              v-model="values.input_type"
+              label="Select an Option of Input Type"
+              textPlaceholder="Please select"
+              :items="[...inputType].map((type) => ({ label: type, value: type }))"
+              class="pa-0"
+            />
           </v-col>
-          <v-col v-if="editQuestion.shouldRenderAddOptions()" cols="auto">
-            <v-btn
-              variant="tonal"
-              rounded="2"
-              size="small"
-              class="bg-orange-darken-3 mt-4"
-              @click="editQuestion.addOptions()"
-              >+ Option</v-btn
-            >
+          <v-col
+            v-if="editQuestion.shouldRenderAddOptions()"
+            cols="12"
+            :sm="editQuestion.shouldRenderAddOptions() ? '2' : '0'"
+          >
+            <BaseButton color="warning" rounded="2" class="bg-orange-darken-3 w-100" @click="editQuestion.addOptions()">
+              + Option
+            </BaseButton>
           </v-col>
         </v-row>
         <div class="mb-6 mb-md-3" v-for="(option, oIndex) in editQuestion.values.options" :key="oIndex">
-          <v-row align="center" no-gutters>
-            <v-col>
-              <v-row no-gutters>
-                <v-col cols="12" md="6">
+          <v-row align="end">
+            <v-col cols="12" sm="10">
+              <v-row>
+                <v-col cols="12">
                   <ShgTextField
                     v-model="values.options[oIndex].option_text.id"
                     :label="`Option Text (ID) - ${oIndex + 1}`"
                     :required="true"
+                    class="pa-0"
                   />
                 </v-col>
-                <v-col cols="12" md="6">
+                <v-col cols="12">
                   <ShgTextField
                     v-model="values.options[oIndex].option_text.eng"
                     :label="`Option Text (ENG) - ${oIndex + 1}`"
                     :required="true"
+                    class="pa-0"
                   />
                 </v-col>
               </v-row>
             </v-col>
 
-            <v-col cols="auto">
-              <div class="mx-2">
-                <v-btn variant="tonal" rounded="2" size="small" class="bg-error" @click="editQuestion.deleteKey(oIndex)"
-                  >Delete</v-btn
-                >
-              </div>
+            <v-col cols="12" sm="2">
+              <ShgButton type="delete" rounded="2" class="bg-error w-100" @click="editQuestion.deleteKey(oIndex)" />
             </v-col>
           </v-row>
         </div>
