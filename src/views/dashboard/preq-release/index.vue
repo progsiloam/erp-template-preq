@@ -1,30 +1,28 @@
 <template>
   <h2 class="mb-3">Master Data Vendor</h2>
-  <v-container fluid>
-    <v-row justify="space-between" align="center">
-      <v-col cols="6">
-        <v-row justify="center" align="center">
-          <v-col cols="3">
-            <ShgTextField field-name="vendor_name" v-model="vendor_name" label="Vendor Name" class="" />
-          </v-col>
-          <v-col cols="3">
-            <ShgTextField field-name="vendor_group" v-model="vendor_group" label="Vendor Group" />
-          </v-col>
-          <v-col cols="3">
-            <ShgTextField field-name="buyer_group" v-model="buyer_group" label="Buyer Group" />
-          </v-col>
-          <v-col cols="3">
-            <ShgButton type="search" class="mt-6" />
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-col cols="6">
-        <div class="text-end">
-          <ShgButton type="export-excel" />
-        </div>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-row justify="space-between" align="end" no-gutters class="mb-3">
+    <v-col cols="6">
+      <v-row justify="center" align="center" no-gutters>
+        <v-col cols="3">
+          <ShgTextField field-name="vendor_name" v-model="vendor_name" label="Vendor Name" class="pa-0 mr-2" />
+        </v-col>
+        <v-col cols="3">
+          <ShgTextField field-name="vendor_group" v-model="vendor_group" label="Vendor Group" class="pa-0 mr-2" />
+        </v-col>
+        <v-col cols="3">
+          <ShgTextField field-name="buyer_group" v-model="buyer_group" label="Buyer Group" class="pa-0 mr-2" />
+        </v-col>
+        <v-col cols="3">
+          <ShgButton type="search" class="mt-6" />
+        </v-col>
+      </v-row>
+    </v-col>
+    <v-col cols="6">
+      <div class="text-end">
+        <ShgButton type="export-excel" />
+      </div>
+    </v-col>
+  </v-row>
   <ShgTable :columns="columns" :items="items">
     <template v-slot:status="{ item }">
       <span :class="`bg-${colorBadge(item.status)} pa-1 rounded`">{{ item.status }}</span>

@@ -113,7 +113,7 @@ const router = createRouter({
               component: () => import('@/views/dashboard/document-pre-scoring/VM/index.vue'),
             },
             {
-              path: '{doc_id}',
+              path: ':doc_id',
               name: 'documentPreScoringVMDetail',
               component: () => import('@/views/dashboard/document-pre-scoring/VM/Vmscoring.vue'),
             },
@@ -129,7 +129,7 @@ const router = createRouter({
               component: () => import('@/views/dashboard/document-pre-scoring/SME/index.vue'),
             },
             {
-              path: '{doc_id}',
+              path: ':doc_id',
               name: 'documentPreScoringSMEDetail',
               component: () => import('@/views/dashboard/document-pre-scoring/SME/Smescoring.vue'),
             },
@@ -145,7 +145,7 @@ const router = createRouter({
               component: () => import('@/views/dashboard/document-pre-scoring/HM/index.vue'),
             },
             {
-              path: '{doc_id}',
+              path: ':doc_id',
               name: 'documentPreScoringHMDetail',
               component: () => import('@/views/dashboard/document-pre-scoring/HM/Hmscoring.vue'),
             },
