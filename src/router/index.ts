@@ -191,7 +191,7 @@ const router = createRouter({
         {
           path: '/pre-q-score',
           name: 'preQScore',
-          component: () => import('@/views/dashboard/preq-release/index.vue'),
+          component: () => import('@/views/dashboard/config/pre-q-score/index.vue'),
         },
         {
           path: '/pre-q-validity',
