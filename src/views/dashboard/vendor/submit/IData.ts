@@ -1,10 +1,10 @@
-interface Language {
+interface Content {
   id: string;
   eng: string;
 }
 
 interface Options {
-  option_text: Language;
+  option_text: Content;
   option_score: number;
 }
 
@@ -19,15 +19,20 @@ const inputType = [
   'Date',
 ] as const;
 
-interface QuestionAttributes {
-  question_text: Language;
+type MarkedQuestion = {
+  approver_id: string;
+  state: 'COLLECTION' | 'REVIEW';
+  comment?: string; // submission
+};
+
+export interface Questions {
+  question_text: Content;
   input_type: (typeof inputType)[number];
   options: Options[];
   question_score: number;
-  user_answer: string[];
-  is_marked?: boolean;
-  comment?: string;
-  total_score?: number;
+  user_answer: string[]; // cut dari question
+  is_marked?: MarkedQuestion[]; // submission
+  total_score?: number; // submission
   is_required: boolean;
 }
 
@@ -37,38 +42,33 @@ interface Evaluation {
   general_info_score?: number;
 }
 
+// IUJK dihilangkan
+// SBU dihilangkan
+// data dari vob dihilangkan
 interface GeneralInfo {
-  legal_address: string[];
-  operational_address: string[];
-  director_name: string[];
-  contact_person_name: string[];
-  phone_number: string[];
-  email_address: string[];
-  date_incorporation: string[];
-  last_change_organization: string[];
-  years_of_establishment: string[];
-  code_of_conduct: string[];
-  vrf_form: string[];
-  surat_etika: string[];
-  npwp: string[];
-  nib: string[];
-  akta_pendirian: string[];
-  sppkp: string[];
-  iujk: string[];
-  sbu: string[];
-  product_list: string[];
-  iso: string[];
-  project_reference: string[];
-  checking_account: string[];
-  financial_statement: string[];
-  paid_up_capital: string[];
-  location_check: string[];
-  location_verification: string[];
+  date_incorporation: Questions;
+  last_change_organization: Questions;
+  years_of_establishment: Questions;
+  code_of_conduct: Questions;
+  vrf_form: Questions;
+  surat_etika: Questions;
+  npwp: Questions;
+  nib: Questions;
+  akta_pendirian: Questions;
+  sppkp: Questions;
+  product_list: Questions;
+  iso: Questions;
+  project_reference: Questions;
+  checking_account: Questions;
+  financial_statement: Questions;
+  paid_up_capital: Questions;
+  location_check: Questions;
+  location_verification: Questions;
 }
 
 interface SectionQuestion {
   name: string;
-  questions: QuestionAttributes[];
+  questions: Questions[];
 }
 
 interface QuestionnaireAttribute {
