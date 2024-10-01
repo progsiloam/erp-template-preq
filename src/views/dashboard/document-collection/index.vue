@@ -22,12 +22,12 @@
       </v-col>
     </v-row>
   </div>
+
   <ShgLayout :navigation-items="navigationItems">
     <template v-slot:contents="{ activeItemValue }">
-      <pre></pre>
       <ShgCard title="Document Collection">
         <v-expansion-panels multiple>
-          <v-expansion-panel id="general" title="General" class="mb-5">
+          <v-expansion-panel title="General" class="mb-5" v-if="'general' === activeItemValue">
             <v-expansion-panel-text>
               <v-table>
                 <thead>
@@ -51,7 +51,7 @@
                   </tr>
                 </tbody>
               </v-table>
-              <v-container class="mt-3">
+              <v-container class="mt-3 border-0 border-t">
                 <v-row no-gutters justify="end">
                   <v-col cols="3" class="text-end">
                     <p class="font-weight-medium text-medium-emphasis">Score by system</p>
@@ -61,7 +61,13 @@
               </v-container>
             </v-expansion-panel-text>
           </v-expansion-panel>
-          <v-expansion-panel id="contructions-panel" title="Contructions" class="mb-5">
+
+          <v-expansion-panel
+            title="Contructions"
+            class="mb-5"
+            v-for="item in [...navigationItems].splice(1)"
+            :key="item.value"
+          >
             <v-expansion-panel-text>
               <v-table>
                 <thead>
@@ -85,7 +91,7 @@
                   </tr>
                 </tbody>
               </v-table>
-              <v-container class="mt-3">
+              <v-container class="mt-3 border-0 border-t">
                 <v-row no-gutters justify="end">
                   <v-col cols="3" class="text-end">
                     <p class="font-weight-medium text-medium-emphasis">Score by system</p>
@@ -126,7 +132,6 @@
             </div>
           </v-card>
         </template>
-        {{ activeItemValue }}
       </ShgCard>
     </template>
   </ShgLayout>
@@ -150,7 +155,7 @@ const router = useRouter();
 
 const navigationItems = ref<LayoutNavigationItem[]>([
   { label: 'General', value: 'general' },
-  { label: 'Contruction', value: 'contruction' },
+  { label: 'Detail', value: 'detail' },
 ]);
 
 const toBackCollectionView = () => {

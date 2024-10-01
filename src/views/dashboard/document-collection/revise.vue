@@ -26,12 +26,11 @@
     <template v-slot:contents="{ activeItemValue }">
       <ShgCard title="Document Collection">
         <v-expansion-panels multiple>
-          <v-expansion-panel id="general" title="General" class="mb-5">
+          <v-expansion-panel title="General" class="mb-5" v-if="'general' === activeItemValue">
             <v-expansion-panel-text>
               <v-table>
                 <thead>
                   <tr>
-                    <th class="text-left" scope="col">Remark</th>
                     <th class="text-left" scope="col">Question</th>
                     <th class="text-left" scope="col">Answer</th>
                     <th class="text-left" scope="col">Attach</th>
@@ -40,7 +39,6 @@
                 </thead>
                 <tbody>
                   <tr v-for="item in submission" :key="item.question">
-                    <td><ShgCheckbox v-model="isMarked" field-name="1" label="" /></td>
                     <td>{{ item.question ?? '-' }}</td>
                     <td>{{ item.answer ?? '-' }}</td>
                     <td>
@@ -52,7 +50,7 @@
                   </tr>
                 </tbody>
               </v-table>
-              <v-container class="mt-3">
+              <v-container class="mt-3 border-0 border-t">
                 <v-row no-gutters justify="end">
                   <v-col cols="3" class="text-end">
                     <p class="font-weight-medium text-medium-emphasis">Score by system</p>
@@ -62,12 +60,17 @@
               </v-container>
             </v-expansion-panel-text>
           </v-expansion-panel>
-          <v-expansion-panel id="contructions-panel" title="Contructions" class="mb-5">
+
+          <v-expansion-panel
+            title="Contructions"
+            class="mb-5"
+            v-for="item in [...navigationItems].splice(1)"
+            :key="item.value"
+          >
             <v-expansion-panel-text>
               <v-table>
                 <thead>
                   <tr>
-                    <th class="text-left" scope="col">Remark</th>
                     <th class="text-left" scope="col">Question</th>
                     <th class="text-left" scope="col">Answer</th>
                     <th class="text-left" scope="col">Attach</th>
@@ -76,7 +79,6 @@
                 </thead>
                 <tbody>
                   <tr v-for="item in submission" :key="item.question">
-                    <td><ShgCheckbox v-model="isMarked" field-name="2" label="" /></td>
                     <td>{{ item.question ?? '-' }}</td>
                     <td>{{ item.answer ?? '-' }}</td>
                     <td>
@@ -88,7 +90,7 @@
                   </tr>
                 </tbody>
               </v-table>
-              <v-container class="mt-3">
+              <v-container class="mt-3 border-0 border-t">
                 <v-row no-gutters justify="end">
                   <v-col cols="3" class="text-end">
                     <p class="font-weight-medium text-medium-emphasis">Score by system</p>
@@ -99,8 +101,6 @@
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
-
-        {{ activeItemValue }}
       </ShgCard>
     </template>
   </ShgLayout>
