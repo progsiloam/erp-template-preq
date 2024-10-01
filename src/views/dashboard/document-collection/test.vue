@@ -23,9 +23,9 @@
       </v-row>
     </v-container>
   </div>
+
   <PreqLayoutDropdown
     :navigationItems="navigationItems"
-    :selectedValue="navigationItems[0].value"
     cardTitle="Document Collection"
     :itemMajor="['general', 'contruction']"
   >
@@ -40,15 +40,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>fadsfasf</td>
+          <tr v-for="i in 50" :key="i">
+            <td>Apa itu Pertanyaan ?</td>
+            <td>Jawaban apa ini ?</td>
+            <td><ShgButton type="view" /></td>
+            <td>10</td>
           </tr>
         </tbody>
       </v-table>
     </template>
 
     <template v-slot:score-system>
-      <v-container class="mt-3">
+      <v-container class="mt-3 border-0 border-t">
         <v-row no-gutters justify="end">
           <v-col cols="3" class="text-end">
             <p class="font-weight-medium text-medium-emphasis">Score by system</p>

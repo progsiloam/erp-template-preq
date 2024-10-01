@@ -29,9 +29,10 @@
               </v-expansion-panel-text>
             </v-expansion-panel>
           </v-expansion-panels>
-          <div v-if="$slots['options']">
+
+          <template v-slot:options v-if="$slots['options']">
             <slot name="options"></slot>
-          </div>
+          </template>
         </ShgCard>
       </v-col>
     </v-row>
@@ -49,12 +50,11 @@ defineOptions({
 
 const props = defineProps<{
   navigationItems: LayoutNavigationItem[];
-  selectedValue?: string | number;
   cardTitle: string;
   itemMajor: string[];
 }>();
 
-const { navigationItems, selectedValue, cardTitle, itemMajor } = toRefs(props);
+const { navigationItems, cardTitle, itemMajor } = toRefs(props);
 
 const activeItemValue = ref<string | number>('');
 
@@ -68,22 +68,20 @@ onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        if (entry.target.id === selectedValue.value) {
-          activeItemValue.value = selectedValue.value;
-        } else if (entry.target.id === navigationItems.value[0].value) {
-          activeItemValue.value = navigationItems.value[0].value;
-        } else {
-          activeItemValue.value = entry.target.id;
-        }
+        activeItemValue.value = entry.target.id;
       }
     });
   }, options);
 
-  const componentId = document.getElementById(activeItemValue.value.toString());
-  if (componentId) observer.observe(componentId);
+  const panels = itemMajor.value.map((item) => document.getElementById(item));
+  panels.forEach((panel) => {
+    if (panel) observer.observe(panel);
+  });
 
   onUnmounted(() => {
-    if (componentId) observer.unobserve(componentId);
+    panels.forEach((panel) => {
+      if (panel) observer.unobserve(panel);
+    });
   });
 });
 </script>
